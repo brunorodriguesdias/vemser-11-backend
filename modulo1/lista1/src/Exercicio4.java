@@ -1,8 +1,17 @@
 public class Exercicio4 {
     public static void main(String[] args) {
-        int a = 10;
-        int b = 20;
-        int transicao;
+//        int a = 10;
+//        int b = 20;
+//        int transicao;
+//
+//        transicao = a;
+//        a = b;
+//        b = transicao;
+
+//      MESMO EXEMPLO COM STRING
+        String a = "A";
+        String b = "B";
+        String transicao;
 
         transicao = a;
         a = b;

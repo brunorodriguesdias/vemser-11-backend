@@ -38,6 +38,5 @@ public class Exercicio9 {
             }
             System.out.println("O jogo durou " + horaDuracao + " horas e " + minutosDuracao + " minutos.");
         }
-
     }
 }
