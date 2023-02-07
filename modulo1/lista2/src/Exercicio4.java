@@ -30,6 +30,6 @@ public class Exercicio4 {
             }
         }
         System.out.printf("A Matricula que teve a maior nota final foi %.0f \n", matriz[indiceMaiorNota][0]);
-        System.out.println("A média das notas finais é " + mediaNotasFinais / matriz.length);
+        System.out.printf("A média das notas finais é %.2f", (mediaNotasFinais / matriz.length));
     }
 }
