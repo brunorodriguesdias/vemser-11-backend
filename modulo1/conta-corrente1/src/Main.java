@@ -74,18 +74,11 @@ public class Main {
         contaRitiele.saldo = 500;
         contaRitiele.chequeEspecial = 200;
 
-//        contaRitiele.depositar(200);
-//        contaRitiele.transferir(contaBruno, 750);
-//
-//        contaRitiele.imprimirContaCorrente();
-//        contaBruno.imprimirContaCorrente();
+        contaRitiele.depositar(200);
+        contaRitiele.transferir(contaBruno, 750);
+        contaBruno.sacar(100);
 
-//        contaBruno.sacar(100);
-//        contaBruno.imprimirContaCorrente();
-
-        
-
-
-
+        contaRitiele.imprimirContaCorrente();
+        contaBruno.imprimirContaCorrente();
     }
 }
