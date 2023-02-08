@@ -5,20 +5,24 @@ public class Cliente {
     Endereco[] endereco = new Endereco[2];
 
     void imprimirContatos(){
-        if (contato[0] != null) {
-            contato[0].imprimirContato();
+        for(int i = 0; i < contato.length; i++){
+            if (contato[i] != null) {
+                contato[i].imprimirContato();
+            }
         }
-        if (contato[1] != null) {
-            contato[1].imprimirContato();
-        }
+//        if (contato[1] != null) {
+//            contato[1].imprimirContato();
+//        }
     }
     void imprimirEnderecos(){
-        if (endereco[0] != null) {
-            endereco[0].imprimirEndereco();
+        for(int i = 0; i < endereco.length; i++){
+            if (endereco[i] != null) {
+                endereco[i].imprimirEndereco();
+            }
         }
-        if (endereco[1] != null) {
-            endereco[1].imprimirEndereco();
-        }
+//        if (endereco[1] != null) {
+//            endereco[1].imprimirEndereco();
+//        }
     }
     void imprimirCliente(){
         System.out.println("Nome: " + nome);
