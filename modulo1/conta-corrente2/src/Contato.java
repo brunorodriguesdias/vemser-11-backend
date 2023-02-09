@@ -9,7 +9,7 @@ public class Contato {
         this.tipo = tipo;
     }
 
-    void imprimirContato() {
+    public void imprimirContato() {
         System.out.println("Descrição do contato: " + descricao);
         System.out.println("Telefone :" + telefone);
         System.out.println("tipo de contato: " + tipo);

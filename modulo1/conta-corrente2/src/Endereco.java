@@ -19,7 +19,7 @@ public class Endereco {
         this.pais = pais;
     }
 
-    void imprimirEndereco(){
+    public void imprimirEndereco(){
         System.out.println("Tipo de endereço: " + tipo);
         System.out.printf("Logradouro: %s número: %s \n", logradouro, numero);
         System.out.println("Complemento: " + complemento);
