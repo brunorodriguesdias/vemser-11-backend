@@ -18,12 +18,15 @@ public class Main {
         ritiele.getContato()[1] = contatoRitiele2;
         ritiele.getEndereco()[0] = enderecoRitiele;
 
-        contaBruno.transferir(contaRitiele, 100);
-        contaBruno.depositar(500);
-        contaRitiele.depositar(500);
-        contaBruno.sacar(1600);
-        contaRitiele.sacar(100);
+//        contaBruno.transferir(contaRitiele, 100);
+//        contaBruno.depositar(500);
+//        contaRitiele.depositar(500);
+//        contaBruno.sacar(1600);
+//        contaRitiele.sacar(100);
+        contaRitiele.creditarTaxa();
+        contaBruno.transferir(contaRitiele, 1200);
 
+//        contaBruno.imprimir();
         contaBruno.imprimir();
         contaRitiele.imprimir();
 
