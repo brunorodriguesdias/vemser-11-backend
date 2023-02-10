@@ -6,10 +6,18 @@ public class ContaPagamento extends Conta implements Impressao{
         super(cliente, numeroConta, agencia, saldo);
     }
 
-
         public boolean sacar(double valorSaque) {
         if(valorSaque > 0 && getSaldo() >= (valorSaque + TAXA_SAQUE)){
             setSaldo(getSaldo() - (valorSaque + TAXA_SAQUE));
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean transferir(Conta contaDestino, double valorTransferencia) {
+        if(super.sacar(valorTransferencia)){
+            contaDestino.depositar(valorTransferencia);
             return true;
         } else {
             return false;

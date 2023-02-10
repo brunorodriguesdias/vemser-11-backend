@@ -45,10 +45,12 @@ public class Main {
 //        contaBruno.imprimir();
 //        contaBruno.imprimir();
 //        contaRitiele.imprimir();
+        contaAlasca.transferir(contaBruno, 200);
 
 //        bruno.imprimirContatos();
 //        bruno.imprimirEnderecos();
-        contaAlasca.sacar(10000);
+//        contaAlasca.sacar(10000);
+        contaBruno.imprimir();
         contaAlasca.imprimir();
 
     }
