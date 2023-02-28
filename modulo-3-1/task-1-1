@@ -19,10 +19,10 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"postId\": 100,\r\n        \"id\": 500,\r\n        \"name\": \"Bruno Rodrigues\",\r\n        \"email\": \"bruno@rodrigues.com.br\",\r\n        \"body\": \"asdfghjkl\"\r\n    }",
+							"raw": "",
 							"options": {
 								"raw": {
-									"language": "json"
+									"language": "text"
 								}
 							}
 						},
