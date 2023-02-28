@@ -1,0 +1,447 @@
+{
+	"info": {
+		"_postman_id": "1e10908d-3f19-43e7-a75a-204fa9c00eb9",
+		"name": "task-1-1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26084115"
+	},
+	"item": [
+		{
+			"name": "comments",
+			"item": [
+				{
+					"name": "comments",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"postId\": 100,\r\n        \"id\": 500,\r\n        \"name\": \"Bruno Rodrigues\",\r\n        \"email\": \"bruno@rodrigues.com.br\",\r\n        \"body\": \"asdfghjkl\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{jsonplaceholder}}comments",
+							"host": [
+								"{{jsonplaceholder}}comments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "comments",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"postId\": 101,\r\n    \"id\": 501,\r\n    \"name\": \"bruno rodrigues\",\r\n    \"email\": \"bruno@rodrigues.com.br\",\r\n    \"body\": \"asdf\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{jsonplaceholder}}comments",
+							"host": [
+								"{{jsonplaceholder}}comments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "comments",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"postId\": 101,\r\n    \"id\": 501,\r\n    \"name\": \"bruno rodrigues\",\r\n    \"email\": \"bruno@rodrigues.com.br\",\r\n    \"body\": \"asdfghjklzxcvbnbm\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{jsonplaceholder}}comments/101",
+							"host": [
+								"{{jsonplaceholder}}comments"
+							],
+							"path": [
+								"101"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "comments",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{jsonplaceholder}}comments/101",
+							"host": [
+								"{{jsonplaceholder}}comments"
+							],
+							"path": [
+								"101"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "photos",
+			"item": [
+				{
+					"name": "photos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{jsonplaceholder}}photos",
+							"host": [
+								"{{jsonplaceholder}}photos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "photos",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"albumId\": 101,\r\n    \"id\": 5001,\r\n    \"title\": \"albim bruno\",\r\n    \"url\": \"https://via.placeholder.com/600/92c956465452\",\r\n    \"thumbnailUrl\": \"https://via.placeholder.com/150/92c956465452\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{jsonplaceholder}}photos",
+							"host": [
+								"{{jsonplaceholder}}photos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "photos",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"albumId\": 101,\r\n    \"id\": 5001,\r\n    \"title\": \"album bruno rodrigues\",\r\n    \"url\": \"https://via.placeholder.com/600/92c956465452\",\r\n    \"thumbnailUrl\": \"https://via.placeholder.com/150/92c956465452\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{jsonplaceholder}}photos/101",
+							"host": [
+								"{{jsonplaceholder}}photos"
+							],
+							"path": [
+								"101"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "photos",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{jsonplaceholder}}photos/101",
+							"host": [
+								"{{jsonplaceholder}}photos"
+							],
+							"path": [
+								"101"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "todos",
+			"item": [
+				{
+					"name": "todos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{jsonplaceholder}}todos",
+							"host": [
+								"{{jsonplaceholder}}todos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "todos",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": 11,\r\n    \"id\": 1,\r\n    \"title\": \"poqiwuriqwroihqwhr\",\r\n    \"completed\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{jsonplaceholder}}todos",
+							"host": [
+								"{{jsonplaceholder}}todos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "todos",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": 11,\r\n    \"id\": 1,\r\n    \"title\": \"poqiwuriqwasfasjknfasjfkroihqwhr\",\r\n    \"completed\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{jsonplaceholder}}todos/11",
+							"host": [
+								"{{jsonplaceholder}}todos"
+							],
+							"path": [
+								"11"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "todos",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{jsonplaceholder}}todos/11",
+							"host": [
+								"{{jsonplaceholder}}todos"
+							],
+							"path": [
+								"11"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "albums",
+			"item": [
+				{
+					"name": "albums",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{jsonplaceholder}}albums",
+							"host": [
+								"{{jsonplaceholder}}albums"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "albums",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": 200,\r\n    \"id\": 200,\r\n    \"title\": \"album bruno\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{jsonplaceholder}}albums",
+							"host": [
+								"{{jsonplaceholder}}albums"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request Copy 6",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": 200,\r\n    \"id\": 200,\r\n    \"title\": \"album bruno editado\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{jsonplaceholder}}albums/50",
+							"host": [
+								"{{jsonplaceholder}}albums"
+							],
+							"path": [
+								"50"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "albums",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{jsonplaceholder}}albums/200",
+							"host": [
+								"{{jsonplaceholder}}albums"
+							],
+							"path": [
+								"200"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{jsonplaceholder}}users",
+							"host": [
+								"{{jsonplaceholder}}users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "users",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"id\": 15,\r\n        \"name\": \"Alasca Rodrigues\",\r\n        \"username\": \"alasquinha\",\r\n        \"email\": \"alasca@gatabranca.com.br\",\r\n        \"address\": {\r\n            \"street\": \"rua dos gatos\",\r\n            \"suite\": \"Apt. 302\",\r\n            \"city\": \"Cachoeirinha\",\r\n            \"zipcode\": \"94950-000\",\r\n            \"geo\": {\r\n                \"lat\": \"-37.3159\",\r\n                \"lng\": \"81.1496\"\r\n            }\r\n        },\r\n        \"phone\": \"1-477-935-8478 x6430\",\r\n        \"website\": \"ola.org\",\r\n        \"company\": {\r\n            \"name\": \"Considine-Lockman\",\r\n            \"catchPhrase\": \"Synchronised bottom-line interface\",\r\n            \"bs\": \"e-enable innovative applications\"\r\n        }\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{jsonplaceholder}}users",
+							"host": [
+								"{{jsonplaceholder}}users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "users",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"id\": 15,\r\n        \"name\": \"Alasca Rodrigues Cabeleira\",\r\n        \"username\": \"alasquinha\",\r\n        \"email\": \"alasca@gatabranca.com.br\",\r\n        \"address\": {\r\n            \"street\": \"rua dos gatos surdos\",\r\n            \"suite\": \"Apt. 302\",\r\n            \"city\": \"Cachoeirinha\",\r\n            \"zipcode\": \"94950-000\",\r\n            \"geo\": {\r\n                \"lat\": \"-37.3159\",\r\n                \"lng\": \"81.1496\"\r\n            }\r\n        },\r\n        \"phone\": \"1-477-935-8478 x6430\",\r\n        \"website\": \"ola.org\",\r\n        \"company\": {\r\n            \"name\": \"Considine-Lockman\",\r\n            \"catchPhrase\": \"Synchronised bottom-line interface\",\r\n            \"bs\": \"e-enable innovative applications\"\r\n        }\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{jsonplaceholder}}users/10",
+							"host": [
+								"{{jsonplaceholder}}users"
+							],
+							"path": [
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "users",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{jsonplaceholder}}users/10",
+							"host": [
+								"{{jsonplaceholder}}users"
+							],
+							"path": [
+								"10"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

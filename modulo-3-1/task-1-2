@@ -1,0 +1,374 @@
+{
+	"info": {
+		"_postman_id": "1f0d74c3-8332-42de-adc9-9720d0346427",
+		"name": "task1-2-pessoa-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26084115"
+	},
+	"item": [
+		{
+			"name": "Pessoa",
+			"item": [
+				{
+					"name": "Pessoa",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ2ZW1zZXItYXBpIiwianRpIjoiMiIsImNhcmdvcyI6WyJST0xFX01BUktFVElORyIsIlJPTEVfVVNVQVJJTyIsIlJPTEVfQURNSU4iXSwiaWF0IjoxNjc3NTQzNDc2LCJleHAiOjE2Nzc2Mjk4NzZ9.C4gzel8amIqjTB_u7URzTMiwEYoM3TzI8CMO4mU4OZY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://vemser-dbc.dbccompany.com.br:39000/vemser/dbc-pessoa-api/pessoa",
+							"protocol": "http",
+							"host": [
+								"vemser-dbc",
+								"dbccompany",
+								"com",
+								"br"
+							],
+							"port": "39000",
+							"path": [
+								"vemser",
+								"dbc-pessoa-api",
+								"pessoa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pessoa",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ2ZW1zZXItYXBpIiwianRpIjoiMiIsImNhcmdvcyI6WyJST0xFX01BUktFVElORyIsIlJPTEVfVVNVQVJJTyIsIlJPTEVfQURNSU4iXSwiaWF0IjoxNjc3NTQzNDc2LCJleHAiOjE2Nzc2Mjk4NzZ9.C4gzel8amIqjTB_u7URzTMiwEYoM3TzI8CMO4mU4OZY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{pessoa}}/pessoa/9924",
+							"host": [
+								"{{pessoa}}"
+							],
+							"path": [
+								"pessoa",
+								"9924"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pessoa",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ2ZW1zZXItYXBpIiwianRpIjoiMiIsImNhcmdvcyI6WyJST0xFX01BUktFVElORyIsIlJPTEVfVVNVQVJJTyIsIlJPTEVfQURNSU4iXSwiaWF0IjoxNjc3NTQzNDc2LCJleHAiOjE2Nzc2Mjk4NzZ9.C4gzel8amIqjTB_u7URzTMiwEYoM3TzI8CMO4mU4OZY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Alasca Gatinha\",\r\n    \"dataNascimento\": \"2014-11-01\",\r\n    \"cpf\": \"01234567890\",\r\n    \"email\": \"alasca@golpista.com\",\r\n    \"idPessoa\": 56478\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{pessoa}}/pessoa",
+							"host": [
+								"{{pessoa}}"
+							],
+							"path": [
+								"pessoa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pessoa",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ2ZW1zZXItYXBpIiwianRpIjoiMiIsImNhcmdvcyI6WyJST0xFX01BUktFVElORyIsIlJPTEVfVVNVQVJJTyIsIlJPTEVfQURNSU4iXSwiaWF0IjoxNjc3NTQzNDc2LCJleHAiOjE2Nzc2Mjk4NzZ9.C4gzel8amIqjTB_u7URzTMiwEYoM3TzI8CMO4mU4OZY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n            \"nome\": \"Bruno Rodrigues\",\r\n            \"dataNascimento\": \"2000-07-07\",\r\n            \"cpf\": \"01234567890\",\r\n            \"email\": \"bruno@golpista.com\",\r\n            \"idPessoa\": 9912\r\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{pessoa}}/pessoa/9912",
+							"host": [
+								"{{pessoa}}"
+							],
+							"path": [
+								"pessoa",
+								"9912"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Contato",
+			"item": [
+				{
+					"name": "Contato",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ2ZW1zZXItYXBpIiwianRpIjoiMiIsImNhcmdvcyI6WyJST0xFX01BUktFVElORyIsIlJPTEVfVVNVQVJJTyIsIlJPTEVfQURNSU4iXSwiaWF0IjoxNjc3NTQzNDc2LCJleHAiOjE2Nzc2Mjk4NzZ9.C4gzel8amIqjTB_u7URzTMiwEYoM3TzI8CMO4mU4OZY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{pessoa}}/contato",
+							"host": [
+								"{{pessoa}}"
+							],
+							"path": [
+								"contato"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Contato - id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ2ZW1zZXItYXBpIiwianRpIjoiMiIsImNhcmdvcyI6WyJST0xFX01BUktFVElORyIsIlJPTEVfVVNVQVJJTyIsIlJPTEVfQURNSU4iXSwiaWF0IjoxNjc3NTQzNDc2LCJleHAiOjE2Nzc2Mjk4NzZ9.C4gzel8amIqjTB_u7URzTMiwEYoM3TzI8CMO4mU4OZY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{pessoa}}/contato/9959",
+							"host": [
+								"{{pessoa}}"
+							],
+							"path": [
+								"contato",
+								"9959"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Contato",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ2ZW1zZXItYXBpIiwianRpIjoiMiIsImNhcmdvcyI6WyJST0xFX01BUktFVElORyIsIlJPTEVfVVNVQVJJTyIsIlJPTEVfQURNSU4iXSwiaWF0IjoxNjc3NTQzNDc2LCJleHAiOjE2Nzc2Mjk4NzZ9.C4gzel8amIqjTB_u7URzTMiwEYoM3TzI8CMO4mU4OZY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"idPessoa\": 10129,\r\n        \"tipoContato\": \"RESIDENCIAL\",\r\n        \"telefone\": \"(51)99441-4634\",\r\n        \"descricao\": \"telefone\",\r\n        \"idContato\": 1773\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{pessoa}}/contato/10129",
+							"host": [
+								"{{pessoa}}"
+							],
+							"path": [
+								"contato",
+								"10129"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Contato",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ2ZW1zZXItYXBpIiwianRpIjoiMiIsImNhcmdvcyI6WyJST0xFX01BUktFVElORyIsIlJPTEVfVVNVQVJJTyIsIlJPTEVfQURNSU4iXSwiaWF0IjoxNjc3NTQzNDc2LCJleHAiOjE2Nzc2Mjk4NzZ9.C4gzel8amIqjTB_u7URzTMiwEYoM3TzI8CMO4mU4OZY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"idPessoa\": 9991,\r\n        \"tipoContato\": \"RESIDENCIAL\",\r\n        \"telefone\": \"(51)99626-2896\",\r\n        \"descricao\": \"telefone\",\r\n        \"idContato\": 1754\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{pessoa}}/contato/1754",
+							"host": [
+								"{{pessoa}}"
+							],
+							"path": [
+								"contato",
+								"1754"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Contato",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ2ZW1zZXItYXBpIiwianRpIjoiMiIsImNhcmdvcyI6WyJST0xFX01BUktFVElORyIsIlJPTEVfVVNVQVJJTyIsIlJPTEVfQURNSU4iXSwiaWF0IjoxNjc3NTQzNDc2LCJleHAiOjE2Nzc2Mjk4NzZ9.C4gzel8amIqjTB_u7URzTMiwEYoM3TzI8CMO4mU4OZY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{pessoa}}/contato/1754",
+							"host": [
+								"{{pessoa}}"
+							],
+							"path": [
+								"contato",
+								"1754"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Autenticar",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ2ZW1zZXItYXBpIiwianRpIjoiMiIsImNhcmdvcyI6WyJST0xFX01BUktFVElORyIsIlJPTEVfVVNVQVJJTyIsIlJPTEVfQURNSU4iXSwiaWF0IjoxNjc3NTQzNDc2LCJleHAiOjE2Nzc2Mjk4NzZ9.C4gzel8amIqjTB_u7URzTMiwEYoM3TzI8CMO4mU4OZY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"login\": \"admin\",\r\n  \"senha\": \"123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://vemser-dbc.dbccompany.com.br:39000/vemser/dbc-pessoa-api/auth",
+					"protocol": "http",
+					"host": [
+						"vemser-dbc",
+						"dbccompany",
+						"com",
+						"br"
+					],
+					"port": "39000",
+					"path": [
+						"vemser",
+						"dbc-pessoa-api",
+						"auth"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
