@@ -39,7 +39,6 @@ public class ContatoRepository {
         List<Contato> listaConsulta = new ArrayList<>();
         listaConsulta = listaContatos.stream().filter(contato -> contato.getIdPessoa().equals(idPessoa))
                  .collect(Collectors.toList());
-
          return listaConsulta;
     }
 
