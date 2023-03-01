@@ -7,6 +7,7 @@ import br.com.dbc.vemser.pessoaapi.service.PessoaService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 public class ContatoRepository {
 
@@ -33,13 +34,9 @@ public class ContatoRepository {
 
     public List<Contato> listarContatosPorPessoa (Integer idPessoa) {
         List<Contato> listaConsulta = new ArrayList<>();
-        for (int i = 0; i < listaContatos.size(); i++) {
-            Contato contato = listaContatos.get(i);
-            if (idPessoa == contato.getIdPessoa()) {
-                listaConsulta.add(contato);
-            }
-        }
-        return listaConsulta;
+         listaConsulta = listaContatos.stream().filter(contato -> contato.getIdPessoa().equals(idPessoa))
+                 .collect(Collectors.toList());
+         return listaConsulta;
     }
 
     public void delete (Contato contato) { listaContatos.remove(contato); }
