@@ -10,7 +10,7 @@ public class ContatoService {
 
     public ContatoService () { contatoRepository = new ContatoRepository(); }
 
-    public Contato create(Contato contato) { return contatoRepository.create(contato); }
+    public Contato create(Contato contato, Integer idPessoa) throws Exception { return contatoRepository.create(contato, idPessoa); }
 
     public List<Contato> list() { return contatoRepository.lista(); }
 

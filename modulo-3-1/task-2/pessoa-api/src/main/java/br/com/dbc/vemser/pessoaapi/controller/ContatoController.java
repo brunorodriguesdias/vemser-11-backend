@@ -27,9 +27,7 @@ public class ContatoController {
     @PostMapping("/{idPessoa}") // POST localhost:8080/contato/{idPessoa}
     public Contato create(@PathVariable Integer idPessoa,
                           @RequestBody Contato contato) throws Exception {
-        PessoaService pessoaService = new PessoaService();
-        contato.setIdPessoa(pessoaService.getPessoa(idPessoa).getIdPessoa());
-        return contatoService.create(contato);
+        return contatoService.create(contato, idPessoa);
     }
 
     @PutMapping("/{idContato}") // PUT localhost:8080/contato/{idContato}

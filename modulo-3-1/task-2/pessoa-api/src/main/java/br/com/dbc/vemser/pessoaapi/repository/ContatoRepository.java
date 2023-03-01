@@ -2,6 +2,7 @@ package br.com.dbc.vemser.pessoaapi.repository;
 
 import br.com.dbc.vemser.pessoaapi.entity.Contato;
 import br.com.dbc.vemser.pessoaapi.entity.TipoContato;
+import br.com.dbc.vemser.pessoaapi.service.PessoaService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +21,10 @@ public class ContatoRepository {
         listaContatos.add(new Contato(COUNTER.incrementAndGet(), 5, TipoContato.ofTipo(1), "51-99999-4444", "Celular"));
     }
 
-    public Contato create(Contato contato){
+    public Contato create(Contato contato, Integer idPessoa) throws Exception {
         contato.setIdContato(COUNTER.incrementAndGet());
+        PessoaService pessoaService = new PessoaService();
+        contato.setIdPessoa(pessoaService.getPessoa(idPessoa).getIdPessoa());
         listaContatos.add(contato);
         return contato;
     }
