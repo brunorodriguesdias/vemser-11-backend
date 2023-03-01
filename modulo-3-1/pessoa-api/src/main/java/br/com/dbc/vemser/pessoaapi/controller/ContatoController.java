@@ -12,15 +12,15 @@ import java.util.List;
 @RequestMapping("/contato") // localhost:8080/contato
 public class ContatoController {
 
-    private ContatoService contatoService;
+    private final ContatoService contatoService;
 
-    public ContatoController () { contatoService = new ContatoService(); }
+    public ContatoController (ContatoService contatoService) { this.contatoService = contatoService; }
 
     @GetMapping // GET localhost:8080/contato
     public List<Contato> list () { return contatoService.list(); }
 
     @GetMapping("/{idPessoa}") // GET localhost:8080/contato/{idPessoa}
-    public List<Contato> listaPorPessoa (@PathVariable("idPessoa") Integer idPessoa) {
+    public List<Contato> listaPorPessoa (@PathVariable("idPessoa") Integer idPessoa) throws Exception {
         return contatoService.listaPorPessoa(idPessoa);
     }
 

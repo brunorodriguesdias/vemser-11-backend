@@ -1,14 +1,15 @@
 package br.com.dbc.vemser.pessoaapi.service;
 import br.com.dbc.vemser.pessoaapi.entity.Contato;
 import br.com.dbc.vemser.pessoaapi.repository.ContatoRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class ContatoService {
 
-    private ContatoRepository contatoRepository;
+    private final ContatoRepository contatoRepository;
 
-    public ContatoService () { contatoRepository = new ContatoRepository(); }
+    public ContatoService (ContatoRepository contatoRepository) { this.contatoRepository = contatoRepository; }
 
     public Contato create(Contato contato, Integer idPessoa) throws Exception { return contatoRepository.create(contato, idPessoa); }
 
@@ -25,8 +26,13 @@ public class ContatoService {
         return contatoRecuperado;
     }
 
-    public List<Contato> listaPorPessoa (Integer idPessoa) {
-        return contatoRepository.listarContatosPorPessoa(idPessoa);
+    public List<Contato> listaPorPessoa (Integer idPessoa) throws Exception {
+        List<Contato> listContato = contatoRepository.listarContatosPorPessoa(idPessoa);
+        if (listContato.isEmpty()) {
+            throw new Exception("Pessoa não encontrada");
+        }
+        return listContato;
+
     }
 
     private Contato getContato(Integer id) throws Exception {
