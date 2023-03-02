@@ -25,7 +25,7 @@ public class EnderecoRepository {
         listaEnderecos.add(new Endereco(COUNTER.incrementAndGet(),2, TipoEndereco.ofTipo(1), "General Anápio Gomes", 1081, "APTO 302", "94920-270",  "Cachoeirinha", "RS", "Brasil"));
         listaEnderecos.add(new Endereco(COUNTER.incrementAndGet(),3, TipoEndereco.ofTipo(2), "Maranhão", 475, "CASA FUNDOS", "69327-861",  "Brasília", "DF", "Brasil"));
         listaEnderecos.add(new Endereco(COUNTER.incrementAndGet(),4, TipoEndereco.ofTipo(1), "Santa Rita", 318, "APTO 101", "29720-630",  "Recife", "Pernanbuco", "Brasil"));
-        listaEnderecos.add(new Endereco(COUNTER.incrementAndGet(),5, TipoEndereco.ofTipo(2), "São Jorge", 984, "87500-727",  "Jataí", "GO", "Brasil"));
+        listaEnderecos.add(new Endereco(COUNTER.incrementAndGet(),5, TipoEndereco.ofTipo(2), "São Jorge", 984,null, "87500-727",  "Jataí", "GO", "Brasil"));
     }
 
     public List<Endereco> lista () { return listaEnderecos; }
