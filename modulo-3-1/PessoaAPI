@@ -117,6 +117,177 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Pessoa",
+			"item": [
+				{
+					"name": "Pessoa",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localhost}}/pessoa",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"pessoa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pessoa",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{localhost}}/pessoa/1",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"pessoa",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Endereco",
+			"item": [
+				{
+					"name": "Endereco",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localhost}}/endereco",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"endereco"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Endereco - idPessoa",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localhost}}/endereco/3/pessoa",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"endereco",
+								"3",
+								"pessoa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Endereco - id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localhost}}/endereco/5",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"endereco",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Endereco",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tipo\": \"COMERCIAL\",\r\n    \"logradouro\": \"Maranhão\",\r\n    \"numero\": 475,\r\n    \"complemento\": \"CASA FUNDOS\",\r\n    \"cep\": \"69327-861\",\r\n    \"cidade\": \"Brasília\",\r\n    \"estado\": \"DF\",\r\n    \"pais\": \"Brasil\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localhost}}/endereco/5",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"endereco",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Endereco",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tipo\": \"COMERCIAL\",\r\n    \"logradouro\": \"Maranhão\",\r\n    \"numero\": 699,\r\n    \"complemento\": \"CASA AZUL\",\r\n    \"cep\": \"69327-861\",\r\n    \"cidade\": \"Brasília\",\r\n    \"estado\": \"DF\",\r\n    \"pais\": \"Brasil\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localhost}}/endereco/5",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"endereco",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Endereco",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{localhost}}/endereco/5",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"endereco",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"variable": [
