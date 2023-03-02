@@ -1,5 +1,6 @@
 package br.com.dbc.vemser.pessoaapi.service;
 import br.com.dbc.vemser.pessoaapi.entity.Contato;
+import br.com.dbc.vemser.pessoaapi.exceptions.RegraDeNegocioException;
 import br.com.dbc.vemser.pessoaapi.repository.ContatoRepository;
 import org.springframework.stereotype.Service;
 
@@ -36,7 +37,7 @@ public class ContatoService {
     public List<Contato> listaPorPessoa (Integer idPessoa) throws Exception {
         List<Contato> listContato = contatoRepository.listarContatosPorPessoa(idPessoa);
         if (listContato.isEmpty()) {
-            throw new Exception("Pessoa não encontrada");
+            throw new RegraDeNegocioException("Pessoa não encontrada");
         }
         return listContato;
 
@@ -46,7 +47,7 @@ public class ContatoService {
         Contato contatoRecuperado = contatoRepository.lista().stream()
                 .filter(contato -> contato.getIdContato().equals(id))
                 .findFirst()
-                .orElseThrow(() -> new Exception("Contato não encontrado!"));
+                .orElseThrow(() -> new RegraDeNegocioException("Contato não encontrado!"));
         return contatoRecuperado;
     }
 

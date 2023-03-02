@@ -1,10 +1,21 @@
 package br.com.dbc.vemser.pessoaapi.entity;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class Contato {
     private Integer idContato;
     private Integer idPessoa;
+
+    @NotNull
     private TipoContato tipoContato;
+
+    @NotNull
+    @Size(max=13)
     private String numero;
+
+    @NotBlank
     private String descricao;
 
     public Contato() {

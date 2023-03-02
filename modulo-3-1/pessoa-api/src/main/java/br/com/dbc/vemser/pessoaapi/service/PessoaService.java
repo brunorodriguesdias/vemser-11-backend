@@ -1,6 +1,7 @@
 package br.com.dbc.vemser.pessoaapi.service;
 
 import br.com.dbc.vemser.pessoaapi.entity.Pessoa;
+import br.com.dbc.vemser.pessoaapi.exceptions.RegraDeNegocioException;
 import br.com.dbc.vemser.pessoaapi.repository.PessoaRepository;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -17,18 +18,18 @@ public class PessoaService {
     }
 
     public Pessoa create(Pessoa pessoa) throws Exception {
-        if (validarPessoa(pessoa) == false) {
-            throw new Exception("Pessoa inválida!");
-        }
+//        if (validarPessoa(pessoa) == false) {
+//            throw new Exception("Pessoa inválida!");
+//        }
         return pessoaRepository.create(pessoa);
     }
 
-    public boolean validarPessoa(Pessoa pessoa) {
-        if (StringUtils.isBlank(pessoa.getNome()) || ObjectUtils.isEmpty(pessoa.getDataNascimento()) || pessoa.getCpf().length() != 11) {
-            return false;
-        }
-        return true;
-    }
+//    public boolean validarPessoa(Pessoa pessoa) {
+//        if (StringUtils.isBlank(pessoa.getNome()) || ObjectUtils.isEmpty(pessoa.getDataNascimento()) || pessoa.getCpf().length() != 11) {
+//            return false;
+//        }
+//        return true;
+//    }
 
     public List<Pessoa> list(){
         return pessoaRepository.list();
@@ -46,6 +47,10 @@ public class PessoaService {
     }
 
     public void delete(Integer id) throws Exception {
+        Pessoa pessoa = getPessoa(id);
+//        if (validarPessoa(pessoa) == false) {
+//            throw new Exception("Pessoa inválida!");
+//        }
         Pessoa pessoaRecuperada = getPessoa(id);
         pessoaRepository.delete(pessoaRecuperada);
     }
@@ -58,7 +63,7 @@ public class PessoaService {
         Pessoa pessoaRecuperada = pessoaRepository.list().stream()
                 .filter(pessoa -> pessoa.getIdPessoa().equals(id))
                 .findFirst()
-                .orElseThrow(() -> new Exception("Pessoa não encontrada!"));
+                .orElseThrow(() -> new RegraDeNegocioException("Pessoa não encontrada!"));
         return pessoaRecuperada;
     }
 }

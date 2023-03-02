@@ -1,6 +1,7 @@
 package br.com.dbc.vemser.pessoaapi.service;
 
 import br.com.dbc.vemser.pessoaapi.entity.Endereco;
+import br.com.dbc.vemser.pessoaapi.exceptions.RegraDeNegocioException;
 import br.com.dbc.vemser.pessoaapi.repository.EnderecoRepository;
 import org.springframework.stereotype.Service;
 
@@ -42,7 +43,7 @@ public class EnderecoService {
     public List<Endereco> listaPorPessoa (Integer idPessoa) throws Exception {
         List<Endereco> listaEnderecos = enderecoRepository.listaEnderecosPorIdPessoa(idPessoa);
         if (listaEnderecos.isEmpty()) {
-            throw new Exception ("Pessoa não encontrada");
+            throw new RegraDeNegocioException ("Pessoa não encontrada");
         }
         return listaEnderecos;
     }
@@ -50,7 +51,7 @@ public class EnderecoService {
         Endereco enderecoRecuperado = enderecoRepository.lista().stream()
                 .filter(endereco -> endereco.getIdEndereco().equals(id))
                 .findFirst()
-                .orElseThrow(() -> new Exception("Endereço não encontrado!"));
+                .orElseThrow(() -> new RegraDeNegocioException("Endereço não encontrado!"));
         return enderecoRecuperado;
     }
 

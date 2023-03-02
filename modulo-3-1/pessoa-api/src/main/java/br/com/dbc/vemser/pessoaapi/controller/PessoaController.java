@@ -3,10 +3,19 @@ package br.com.dbc.vemser.pessoaapi.controller;
 import br.com.dbc.vemser.pessoaapi.entity.Pessoa;
 import br.com.dbc.vemser.pessoaapi.service.PessoaService;
 import br.com.dbc.vemser.pessoaapi.service.PropertieReader;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
+import static org.springframework.http.HttpStatus.*;
+
+@Validated
 @RestController
 @RequestMapping("/pessoa") // localhost:8080/pessoa
 public class PessoaController {
@@ -40,23 +49,24 @@ public class PessoaController {
     }
 
     @GetMapping("/byname") // GET localhost:8080/pessoa/byname?nome=Rafa
-    public List<Pessoa> listByName(@RequestParam("nome") String nome) {
-        return pessoaService.listByName(nome);
+    public ResponseEntity<List<Pessoa>> listByName(@RequestParam("nome") @NotBlank String nome) {
+        return new ResponseEntity<>(pessoaService.listByName(nome), OK);
     }
 
     @PostMapping // POST localhost:8080/pessoa
-    public Pessoa create(@RequestBody Pessoa pessoa) throws Exception {
+    public Pessoa create(@Valid @RequestBody Pessoa pessoa) throws Exception {
         return pessoaService.create(pessoa);
     }
 
     @PutMapping("/{idPessoa}") // PUT localhost:8080/pessoa/1000
-    public Pessoa update(@PathVariable("idPessoa") Integer id,
+    public Pessoa update(@Valid @PathVariable("idPessoa") Integer id,
                          @RequestBody Pessoa pessoaAtualizar) throws Exception {
         return pessoaService.update(id, pessoaAtualizar);
     }
 
     @DeleteMapping("/{idPessoa}") // DELETE localhost:8080/pessoa/10
-    public void delete(@PathVariable("idPessoa") Integer id) throws Exception {
+    ResponseEntity<Void> delete(@PathVariable("idPessoa") Integer id) throws Exception {
         pessoaService.delete(id);
+        return ResponseEntity.ok().build();
     }
 }
