@@ -17,10 +17,10 @@ public class EnderecoRepository {
     private static List<Endereco> listaEnderecos = new ArrayList<>();
     private AtomicInteger COUNTER = new AtomicInteger();
 
-    private final PessoaService pessoaService;
+
 
     public EnderecoRepository(PessoaService pessoaService) {
-        this.pessoaService = pessoaService;
+
         listaEnderecos.add(new Endereco(COUNTER.incrementAndGet(),1, TipoEndereco.ofTipo(2), "Quinze de Novembro", 6915, "Conjunto 9", "62934-591",  "Palmas", "TO", "Brasil"));
         listaEnderecos.add(new Endereco(COUNTER.incrementAndGet(),2, TipoEndereco.ofTipo(1), "General Anápio Gomes", 1081, "APTO 302", "94920-270",  "Cachoeirinha", "RS", "Brasil"));
         listaEnderecos.add(new Endereco(COUNTER.incrementAndGet(),3, TipoEndereco.ofTipo(2), "Maranhão", 475, "CASA FUNDOS", "69327-861",  "Brasília", "DF", "Brasil"));
@@ -32,7 +32,6 @@ public class EnderecoRepository {
 
     public Endereco create(Endereco endereco, Integer idPessoa) throws Exception {
         endereco.setIdEndereco(COUNTER.incrementAndGet());
-        endereco.setIdPessoa(pessoaService.getPessoa(idPessoa).getIdPessoa());
         listaEnderecos.add(endereco);
         return endereco;
     }

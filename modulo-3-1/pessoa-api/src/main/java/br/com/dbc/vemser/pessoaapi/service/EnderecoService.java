@@ -12,10 +12,17 @@ import java.util.List;
 public class EnderecoService {
 
     private final EnderecoRepository enderecoRepository;
+    private final PessoaService pessoaService;
 
-    public EnderecoService (EnderecoRepository enderecoRepository) { this.enderecoRepository = enderecoRepository; }
 
-    public Endereco create(Endereco endereco, Integer idPessoa) throws Exception { return enderecoRepository.create(endereco, idPessoa); }
+    public EnderecoService (EnderecoRepository enderecoRepository, PessoaService pessoaService) {
+        this.pessoaService = pessoaService;
+        this.enderecoRepository = enderecoRepository; }
+
+    public Endereco create(Endereco endereco, Integer idPessoa) throws Exception {
+        endereco.setIdPessoa(pessoaService.getPessoa(idPessoa).getIdPessoa());
+        return enderecoRepository.create(endereco, idPessoa);
+    }
 
     public List<Endereco> lista () { return enderecoRepository.lista(); }
 

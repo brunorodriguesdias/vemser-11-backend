@@ -8,10 +8,17 @@ import java.util.List;
 public class ContatoService {
 
     private final ContatoRepository contatoRepository;
+    private final PessoaService pessoaService;
 
-    public ContatoService (ContatoRepository contatoRepository) { this.contatoRepository = contatoRepository; }
+    public ContatoService (ContatoRepository contatoRepository, PessoaService pessoaService) {
+        this.pessoaService = pessoaService;
+        this.contatoRepository = contatoRepository;
+    }
 
-    public Contato create(Contato contato, Integer idPessoa) throws Exception { return contatoRepository.create(contato, idPessoa); }
+    public Contato create(Contato contato, Integer idPessoa) throws Exception {
+        contato.setIdPessoa(pessoaService.getPessoa(idPessoa).getIdPessoa());
+        return contatoRepository.create(contato, idPessoa);
+    }
 
     public List<Contato> list() { return contatoRepository.lista(); }
 
