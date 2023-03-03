@@ -59,8 +59,8 @@ public class PessoaController {
     }
 
     @PutMapping("/{idPessoa}") // PUT localhost:8080/pessoa/1000
-    public Pessoa update(@Valid @PathVariable("idPessoa") Integer id,
-                         @RequestBody Pessoa pessoaAtualizar) throws Exception {
+    public Pessoa update(@PathVariable("idPessoa") Integer id,
+                         @Valid @RequestBody Pessoa pessoaAtualizar) throws Exception {
         return pessoaService.update(id, pessoaAtualizar);
     }
 
