@@ -16,15 +16,13 @@ public class EnderecoRepository {
     private static List<Endereco> listaEnderecos = new ArrayList<>();
     private AtomicInteger COUNTER = new AtomicInteger();
 
-
-
     public EnderecoRepository(PessoaService pessoaService) {
 
-        listaEnderecos.add(new Endereco(COUNTER.incrementAndGet(),1, TipoEndereco.ofTipo(2), "Quinze de Novembro", 6915, "Conjunto 9", "62934-591",  "Palmas", "TO", "Brasil"));
-        listaEnderecos.add(new Endereco(COUNTER.incrementAndGet(),2, TipoEndereco.ofTipo(1), "General Anápio Gomes", 1081, "APTO 302", "94920-270",  "Cachoeirinha", "RS", "Brasil"));
-        listaEnderecos.add(new Endereco(COUNTER.incrementAndGet(),3, TipoEndereco.ofTipo(2), "Maranhão", 475, "CASA FUNDOS", "69327-861",  "Brasília", "DF", "Brasil"));
-        listaEnderecos.add(new Endereco(COUNTER.incrementAndGet(),4, TipoEndereco.ofTipo(1), "Santa Rita", 318, "APTO 101", "29720-630",  "Recife", "Pernanbuco", "Brasil"));
-        listaEnderecos.add(new Endereco(COUNTER.incrementAndGet(),5, TipoEndereco.ofTipo(2), "São Jorge", 984,null, "87500-727",  "Jataí", "GO", "Brasil"));
+        listaEnderecos.add(new Endereco(COUNTER.incrementAndGet(),1, TipoEndereco.ofTipo(2), "Quinze de Novembro", 6915, "Conjunto 9", "62934591",  "Palmas", "TO", "Brasil"));
+        listaEnderecos.add(new Endereco(COUNTER.incrementAndGet(),2, TipoEndereco.ofTipo(1), "General Anápio Gomes", 1081, "APTO 302", "94920270",  "Cachoeirinha", "RS", "Brasil"));
+        listaEnderecos.add(new Endereco(COUNTER.incrementAndGet(),3, TipoEndereco.ofTipo(2), "Maranhão", 475, "CASA FUNDOS", "69327861",  "Brasília", "DF", "Brasil"));
+        listaEnderecos.add(new Endereco(COUNTER.incrementAndGet(),4, TipoEndereco.ofTipo(1), "Santa Rita", 318, "APTO 101", "29720630",  "Recife", "Pernanbuco", "Brasil"));
+        listaEnderecos.add(new Endereco(COUNTER.incrementAndGet(),5, TipoEndereco.ofTipo(2), "São Jorge", 984,null, "87500727",  "Jataí", "GO", "Brasil"));
     }
 
     public List<Endereco> lista () { return listaEnderecos; }

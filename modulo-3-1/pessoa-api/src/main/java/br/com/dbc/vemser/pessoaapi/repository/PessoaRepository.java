@@ -33,14 +33,6 @@ public class PessoaRepository {
         return listaPessoas;
     }
 
-//    public Pessoa update(Integer id,
-//                         Pessoa pessoaAtualizar) {
-//        pessoaAtualizar.setCpf(pessoaAtualizar.getCpf());
-//        pessoaAtualizar.setNome(pessoaAtualizar.getNome());
-//        pessoaAtualizar.setDataNascimento(pessoaAtualizar.getDataNascimento());
-//        return pessoaAtualizar;
-//    }
-
     public void delete(Pessoa pessoa) {
         listaPessoas.remove(pessoa);
     }

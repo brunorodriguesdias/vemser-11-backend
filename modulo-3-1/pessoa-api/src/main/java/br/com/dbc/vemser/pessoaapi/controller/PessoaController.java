@@ -1,20 +1,20 @@
 package br.com.dbc.vemser.pessoaapi.controller;
 
-import br.com.dbc.vemser.pessoaapi.entity.Pessoa;
+import br.com.dbc.vemser.pessoaapi.dto.PessoaCreateDTO;
+import br.com.dbc.vemser.pessoaapi.dto.PessoaDTO;
 import br.com.dbc.vemser.pessoaapi.service.PessoaService;
 import br.com.dbc.vemser.pessoaapi.service.PropertieReader;
-import org.springframework.http.HttpStatus;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
 import static org.springframework.http.HttpStatus.*;
-
+@Slf4j
 @Validated
 @RestController
 @RequestMapping("/pessoa") // localhost:8080/pessoa
@@ -44,29 +44,33 @@ public class PessoaController {
     }
 
     @GetMapping // GET localhost:8080/pessoa
-    public List<Pessoa> list() {
+    public List<PessoaDTO> list() {
         return pessoaService.list();
     }
 
     @GetMapping("/byname") // GET localhost:8080/pessoa/byname?nome=Rafa
-    public ResponseEntity<List<Pessoa>> listByName(@RequestParam("nome") @NotBlank String nome) {
+    public ResponseEntity<List<PessoaDTO>> listByName(@RequestParam("nome") @NotBlank String nome) {
         return new ResponseEntity<>(pessoaService.listByName(nome), OK);
     }
 
     @PostMapping // POST localhost:8080/pessoa
-    public Pessoa create(@Valid @RequestBody Pessoa pessoa) throws Exception {
-        return pessoaService.create(pessoa);
+    public PessoaDTO create(@Valid @RequestBody PessoaCreateDTO pessoaDTO) throws Exception {
+        log.info("Criando pessoa...");
+        return pessoaService.create(pessoaDTO);
     }
 
     @PutMapping("/{idPessoa}") // PUT localhost:8080/pessoa/1000
-    public Pessoa update(@PathVariable("idPessoa") Integer id,
-                         @Valid @RequestBody Pessoa pessoaAtualizar) throws Exception {
-        return pessoaService.update(id, pessoaAtualizar);
+    public PessoaDTO update(@PathVariable("idPessoa") Integer id,
+                            @Valid @RequestBody PessoaDTO pessoaDTOAtualizar) throws Exception {
+        log.info("Atualizando pessoa...");
+        return pessoaService.update(id, pessoaDTOAtualizar);
     }
 
     @DeleteMapping("/{idPessoa}") // DELETE localhost:8080/pessoa/10
     ResponseEntity<Void> delete(@PathVariable("idPessoa") Integer id) throws Exception {
+        log.info("Deletando pessoa...");
         pessoaService.delete(id);
+        log.info("Pessoa deletada!");
         return ResponseEntity.ok().build();
     }
 }
