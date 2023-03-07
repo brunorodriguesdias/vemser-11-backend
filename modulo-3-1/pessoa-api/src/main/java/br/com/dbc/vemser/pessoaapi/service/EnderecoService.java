@@ -19,6 +19,7 @@ public class EnderecoService {
     private final EnderecoRepository enderecoRepository;
     private final PessoaService pessoaService;
     private final ObjectMapper objectMapper;
+    private final EmailService emailService;
 
 
 
@@ -26,6 +27,9 @@ public class EnderecoService {
         enderecoCreateDTO.setIdPessoa(pessoaService.getPessoa(idPessoa).getIdPessoa());
         Endereco enderecoEntity = objectMapper.convertValue(enderecoCreateDTO, Endereco.class);
         Endereco endereco = enderecoRepository.create(enderecoEntity, idPessoa);
+
+        emailService.sendEmail(emailService.getCriandoEnderecoTemplate(endereco, pessoaService.getPessoa(endereco.getIdPessoa())));
+
         return objectMapper.convertValue(endereco, EnderecoDTO.class);
     }
 
@@ -49,6 +53,8 @@ public class EnderecoService {
         enderecoRecuperado.setCidade(enderecoAtualizar.getCidade());
         enderecoRecuperado.setEstado(enderecoAtualizar.getEstado());
         enderecoRecuperado.setPais(enderecoAtualizar.getPais());
+
+        emailService.sendEmail(emailService.getEdicaoEnderecoTemplate(enderecoRecuperado, pessoaService.getPessoa(enderecoAtualizar.getIdPessoa())));
 
         return objectMapper.convertValue(enderecoRecuperado, EnderecoDTO.class);
     }
@@ -76,6 +82,7 @@ public class EnderecoService {
 
     public void delete (Integer idEndereco) throws Exception {
         Endereco enderecoRecuperado = objectMapper.convertValue(getEndereco(idEndereco), Endereco.class);
+        emailService.sendEmail(emailService.getDelecaoEnderecoTemplate(enderecoRecuperado, pessoaService.getPessoa(enderecoRecuperado.getIdPessoa())));
         enderecoRepository.delete(enderecoRecuperado);
     }
 }
