@@ -66,21 +66,49 @@ public class EmailService {
         emailSender.send(message);
     }
 
-    public void sendEmail(String template) throws RegraDeNegocioException {
+    public void sendEmail(Pessoa pessoa, int acao) throws RegraDeNegocioException {
         MimeMessage mimeMessage = emailSender.createMimeMessage();
         try {
 
             MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
 
             mimeMessageHelper.setFrom(from);
-            mimeMessageHelper.setTo(TO);
+            mimeMessageHelper.setTo(pessoa.getEmail());
             mimeMessageHelper.setSubject("E-mail Template");
-            mimeMessageHelper.setText(template, true);
+            mimeMessageHelper.setText(getPessoaTemplate(pessoa, acao), true);
 
             emailSender.send(mimeMessageHelper.getMimeMessage());
         } catch (MessagingException e) {
             e.printStackTrace();
             throw new RegraDeNegocioException("ERRO ao enviar e-mail.");
+        } catch (TemplateException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void sendEmail(Pessoa pessoa, Endereco endereco, int acao) throws RegraDeNegocioException {
+        MimeMessage mimeMessage = emailSender.createMimeMessage();
+        try {
+
+            MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
+
+            mimeMessageHelper.setFrom(from);
+            mimeMessageHelper.setTo(pessoa.getEmail());
+            mimeMessageHelper.setSubject("E-mail Template");
+            mimeMessageHelper.setText(getEnderecoTemplate(pessoa, endereco, acao), true);
+
+            emailSender.send(mimeMessageHelper.getMimeMessage());
+        } catch (MessagingException e) {
+            e.printStackTrace();
+            throw new RegraDeNegocioException("ERRO ao enviar e-mail.");
+        } catch (TemplateException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -93,10 +121,22 @@ public class EmailService {
         return html;
     }
 
-    public String getPessoaTemplate(Pessoa pessoa) throws IOException, TemplateException {
+    public String getPessoaTemplate(Pessoa pessoa, int acao) throws IOException, TemplateException {
         Map<String, Object> dados = new HashMap<>();
+        String texto = "";
+        switch(acao) {
+            case 1 -> {
+                texto = "Estamos felizes em ter você em nosso sistema :)\n Seu cadastro foi realizado com sucesso seu identificador é " + pessoa.getIdPessoa();
+            }
+            case 2 -> {
+                texto = "Seus dados foram atualizados no nosso sistema";
+            }
+            case 3 -> {
+                texto = "Você perdeu acesso ao nosso sistema";
+            }
+        }
         dados.put("nome", pessoa.getNome());
-        dados.put("id", pessoa.getIdPessoa());
+        dados.put("texto", texto);
         dados.put("email", from);
 
         Template template = fmConfiguration.getTemplate("email-template-pessoa.ftl");
@@ -104,77 +144,29 @@ public class EmailService {
         return html;
     }
 
-    public String getEdicaoPessoaTemplate(Pessoa pessoa) throws IOException, TemplateException {
+    public String getEnderecoTemplate(Pessoa pessoa, Endereco endereco, int acao) throws Exception {
         Map<String, Object> dados = new HashMap<>();
+        String texto = "";
+        switch(acao) {
+            case 1 -> {
+                texto = "Foi adicionado um novo endereço a sua conta,";
+            }
+            case 2 -> {
+                texto = "Seu endereço foi editado com sucesso";
+            }
+            case 3 -> {
+                texto = "Seu endereço foi excluido com sucesso";
+            }
+        }
         dados.put("nome", pessoa.getNome());
-        dados.put("id", pessoa.getIdPessoa());
-        dados.put("nascimento", pessoa.getDataNascimento());
-        dados.put("cpf", pessoa.getCpf());
-        dados.put("email", from);
-
-        Template template = fmConfiguration.getTemplate("email-template-edicaoPessoa.ftl");
-        String html = FreeMarkerTemplateUtils.processTemplateIntoString(template, dados);
-        return html;
-    }
-
-    public String getDelecaoPessoaTemplate(Pessoa pessoa) throws IOException, TemplateException {
-        Map<String, Object> dados = new HashMap<>();
-        dados.put("nome", pessoa.getNome());
-        dados.put("email", from);
-
-        Template template = fmConfiguration.getTemplate("email-template-delecaoPessoa.ftl");
-        String html = FreeMarkerTemplateUtils.processTemplateIntoString(template, dados);
-        return html;
-    }
-
-    public String getCriandoEnderecoTemplate(Endereco endereco, Pessoa pessoa) throws Exception {
-        Map<String, Object> dados = new HashMap<>();
-        dados.put("nome", pessoa.getNome());
-        dados.put("tipo", endereco.getTipo());
+        dados.put("texto", texto);
         dados.put("logradouro", endereco.getLogradouro());
         dados.put("numero", endereco.getNumero());
         dados.put("complemento", endereco.getComplemento());
-        dados.put("cep", endereco.getCep());
-        dados.put("cidade", endereco.getCidade());
-        dados.put("estado", endereco.getEstado());
-        dados.put("pais", endereco.getPais());
         dados.put("email", from);
 
-        Template template = fmConfiguration.getTemplate("email-template-criandoEndereco.ftl");
+        Template template = fmConfiguration.getTemplate("email-template-endereco.ftl");
         String html = FreeMarkerTemplateUtils.processTemplateIntoString(template, dados);
         return html;
     }
-
-    public String getEdicaoEnderecoTemplate(Endereco endereco, Pessoa pessoa) throws Exception {
-        Map<String, Object> dados = new HashMap<>();
-        dados.put("nome", pessoa.getNome());
-        dados.put("tipo", endereco.getTipo());
-        dados.put("logradouro", endereco.getLogradouro());
-        dados.put("numero", endereco.getNumero());
-        dados.put("complemento", endereco.getComplemento());
-        dados.put("cep", endereco.getCep());
-        dados.put("cidade", endereco.getCidade());
-        dados.put("estado", endereco.getEstado());
-        dados.put("pais", endereco.getPais());
-        dados.put("email", from);
-
-        Template template = fmConfiguration.getTemplate("email-template-edicaoEndereco.ftl");
-        String html = FreeMarkerTemplateUtils.processTemplateIntoString(template, dados);
-        return html;
-    }
-
-    public String getDelecaoEnderecoTemplate(Endereco endereco, Pessoa pessoa) throws Exception {
-        Map<String, Object> dados = new HashMap<>();
-        dados.put("nome", pessoa.getNome());
-        dados.put("tipo", endereco.getTipo());
-        dados.put("logradouro", endereco.getLogradouro());
-        dados.put("numero", endereco.getNumero());
-        dados.put("email", from);
-
-        Template template = fmConfiguration.getTemplate("email-template-delecaoEndereco.ftl");
-        String html = FreeMarkerTemplateUtils.processTemplateIntoString(template, dados);
-        return html;
-    }
-
-
 }

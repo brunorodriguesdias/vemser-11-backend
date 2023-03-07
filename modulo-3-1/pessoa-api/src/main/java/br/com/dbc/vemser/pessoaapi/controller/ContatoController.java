@@ -17,34 +17,34 @@ import static org.springframework.http.HttpStatus.OK;
 @Validated
 @RestController
 @RequestMapping("/contato") // localhost:8080/contato
-public class ContatoController {
+public class ContatoController implements ContatoDoc {
 
     private final ContatoService contatoService;
 
     public ContatoController (ContatoService contatoService) { this.contatoService = contatoService; }
-
+    @Override
     @GetMapping // GET localhost:8080/contato
     public List<ContatoDTO> list () { return contatoService.list(); }
-
+    @Override
     @GetMapping("/{idPessoa}") // GET localhost:8080/contato/{idPessoa}
     public ResponseEntity<List<ContatoDTO>> listaPorPessoa (@PathVariable("idPessoa") Integer idPessoa) throws Exception {
         return new ResponseEntity<>(contatoService.listaPorPessoa(idPessoa), OK);
     }
-
+    @Override
     @PostMapping("/{idPessoa}") // POST localhost:8080/contato/{idPessoa}
     public ContatoDTO create(@PathVariable Integer idPessoa,
                           @Valid @RequestBody ContatoCreateDTO contatoDTO) throws Exception {
         log.info("Criando contato...");
         return contatoService.create(contatoDTO, idPessoa);
     }
-
+    @Override
     @PutMapping("/{idContato}") // PUT localhost:8080/contato/{idContato}
     public ContatoDTO update(@PathVariable("idContato") Integer id,
                           @Valid @RequestBody ContatoCreateDTO contatoAtualizar) throws Exception {
         log.info("Atualizando contato...");
         return contatoService.update(id, contatoAtualizar);
     }
-
+    @Override
     @DeleteMapping("/{idContato}") // DELETE localhost:8080/contato/{idContato}
     public ResponseEntity<Void> delete(@PathVariable("idContato") Integer id) throws Exception {
         log.info("Deletando contato...");

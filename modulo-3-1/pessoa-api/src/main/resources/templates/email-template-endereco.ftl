@@ -16,10 +16,8 @@
 
                         <div style="font-size: 21px; color:blue;">
                             <b>Olá ${nome}</b>, <br>
-                            Foi associado um novo endereço no seu usuário. <br>
-                            Segue dados: Tipo: <b>${tipo}</b>, Logradouro: <b>${logradouro}</b>, Numero: <b>${numero}</b> <br>
-                            Complemento: <b>${complemento}</b>, CEP: <b>${cep}</b>, Cidade: <b>${cidade}</b> <br>
-                            Estado: <b>${estado}</b>, País: <b>${pais}</b>
+                            ${texto}
+                            Segue dados: Logradouro: <b>${logradouro}</b>, Numero: <b>${numero}</b>, Complemento: <b>${complemento}</b> <br>
                         </div>
 
                         <div style="font-size: 16px; color: #555100;">

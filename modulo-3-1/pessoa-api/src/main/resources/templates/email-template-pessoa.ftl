@@ -14,13 +14,12 @@
                     <td align="center" valign="top" bgcolor="#d3be6c"
                         style="background-color: #d3be6c; font-family: Arial, Helvetica, sans-serif; font-size: 13px; color: #000000; padding: 0px 15px 10px 15px;">
 
-                        <div style="font-size: 48px; color:blue;">
+                        <div style="font-size: 21px; color:blue;">
                             <b>Olá ${nome}</b>, <br>
-                            Estamos felizes em em ter você em nosso sistema :) <br>
-                            Seu cadastro foi realizado com sucesso, seu identificador é <b>${id}</b>
+                            ${texto}
                         </div>
 
-                        <div style="font-size: 24px; color: #555100;">
+                        <div style="font-size: 16px; color: #555100;">
                             <br>Qualquer duvida é só contatar o suporte pelo e-mail ${email}</b> <br>
                         </div>
                         <div>

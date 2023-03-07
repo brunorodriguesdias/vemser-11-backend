@@ -25,7 +25,9 @@ public class PessoaService {
     public PessoaDTO create(PessoaCreateDTO pessoaDTO) throws Exception {
         Pessoa pessoaEntity = objectMapper.convertValue(pessoaDTO, Pessoa.class);
         Pessoa pessoa = pessoaRepository.create(pessoaEntity);
-        emailService.sendEmail(emailService.getPessoaTemplate(pessoa));
+
+        emailService.sendEmail(pessoa, 1);
+
         return objectMapper.convertValue(pessoa, PessoaDTO.class);
     }
 
@@ -41,16 +43,17 @@ public class PessoaService {
         pessoaRecuperada.setNome(pessoaAtualizarDTO.getNome());
         pessoaRecuperada.setDataNascimento(pessoaAtualizarDTO.getDataNascimento());
 
+        emailService.sendEmail(pessoaRecuperada, 2);
+
         PessoaDTO pessoaDTO = objectMapper.convertValue(pessoaRecuperada, PessoaDTO.class);
 
-        emailService.sendEmail(emailService.getEdicaoPessoaTemplate(pessoaRecuperada));
         return pessoaDTO;
     }
 
     public void delete(Integer id) throws Exception {
         Pessoa pessoa = getPessoa(id);
         Pessoa pessoaRecuperada = getPessoa(id);
-        emailService.sendEmail(emailService.getDelecaoPessoaTemplate(getPessoa(id)));
+        emailService.sendEmail(pessoa, 3);
         pessoaRepository.delete(pessoaRecuperada);
 
     }

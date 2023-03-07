@@ -4,6 +4,9 @@ import br.com.dbc.vemser.pessoaapi.dto.PessoaCreateDTO;
 import br.com.dbc.vemser.pessoaapi.dto.PessoaDTO;
 import br.com.dbc.vemser.pessoaapi.service.PessoaService;
 import br.com.dbc.vemser.pessoaapi.service.PropertieReader;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -18,7 +21,7 @@ import static org.springframework.http.HttpStatus.*;
 @Validated
 @RestController
 @RequestMapping("/pessoa") // localhost:8080/pessoa
-public class PessoaController {
+public class PessoaController implements PessoaDoc {
 
     private final PessoaService pessoaService;
     private final PropertieReader propertieReader;
@@ -43,6 +46,7 @@ public class PessoaController {
         return "Hello world 2!";
     }
 
+    @Override
     @GetMapping // GET localhost:8080/pessoa
     public List<PessoaDTO> list() {
         return pessoaService.list();
@@ -53,12 +57,14 @@ public class PessoaController {
         return new ResponseEntity<>(pessoaService.listByName(nome), OK);
     }
 
+    @Override
     @PostMapping // POST localhost:8080/pessoa
-    public PessoaDTO create(@Valid @RequestBody PessoaCreateDTO pessoaDTO) throws Exception {
+    public PessoaDTO create(@Valid @RequestBody PessoaCreateDTO pessoaDTO) throws Exception{
         log.info("Criando pessoa...");
         return pessoaService.create(pessoaDTO);
     }
 
+    @Override
     @PutMapping("/{idPessoa}") // PUT localhost:8080/pessoa/1000
     public PessoaDTO update(@PathVariable("idPessoa") Integer id,
                             @Valid @RequestBody PessoaDTO pessoaDTOAtualizar) throws Exception {
@@ -66,8 +72,9 @@ public class PessoaController {
         return pessoaService.update(id, pessoaDTOAtualizar);
     }
 
+    @Override
     @DeleteMapping("/{idPessoa}") // DELETE localhost:8080/pessoa/10
-    ResponseEntity<Void> delete(@PathVariable("idPessoa") Integer id) throws Exception {
+    public ResponseEntity<Void> delete(@PathVariable("idPessoa") Integer id) throws Exception {
         log.info("Deletando pessoa...");
         pessoaService.delete(id);
         log.info("Pessoa deletada!");
