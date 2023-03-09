@@ -13,6 +13,7 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @AllArgsConstructor
 public class EnderecoCreateDTO {
+    @Schema(description = "Id da pessoa")
     private Integer idPessoa;
 
     @NotNull

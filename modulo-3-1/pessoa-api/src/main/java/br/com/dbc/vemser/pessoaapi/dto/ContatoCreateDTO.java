@@ -14,6 +14,7 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ContatoCreateDTO {
+    @Schema(description = "Id da pessoa")
     private Integer idPessoa;
 
     @NotNull
