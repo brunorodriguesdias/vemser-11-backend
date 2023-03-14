@@ -27,16 +27,20 @@ public class EnderecoService {
     public EnderecoDTO create(EnderecoCreateDTO enderecoCreateDTO, Integer idPessoa) throws Exception {
         PessoaEntity pessoa = pessoaService.getPessoa(idPessoa);
         enderecoCreateDTO.setIdPessoa(pessoa.getIdPessoa());
+
         EnderecoEntity enderecoEntity = objectMapper.convertValue(enderecoCreateDTO, EnderecoEntity.class);
-        EnderecoEntity endereco = enderecoRepository.create(enderecoEntity, idPessoa);
+        EnderecoEntity enderecoCriado = enderecoRepository.save(enderecoEntity);
 
-        emailService.sendEmail(pessoa, endereco, 1);
+//        emailService.sendEmail(pessoa, endereco, 1);
 
-        return objectMapper.convertValue(endereco, EnderecoDTO.class);
+        EnderecoDTO enderecoDTO = objectMapper.convertValue(enderecoCriado, EnderecoDTO.class);
+
+        return enderecoDTO;
     }
 
     public List<EnderecoDTO> lista () {
-        return enderecoRepository.lista().stream()
+        return enderecoRepository.findAll()
+                .stream()
                 .map(endereco -> objectMapper.convertValue(endereco, EnderecoDTO.class))
                 .collect(Collectors.toList());
     }
@@ -45,8 +49,9 @@ public class EnderecoService {
 
         PessoaEntity pessoa = pessoaService.getPessoa(enderecoAtualizar.getIdPessoa());
 
-        EnderecoEntity enderecoRecuperado = getEnderecoById(id);
-        enderecoRecuperado.setIdPessoa(enderecoAtualizar.getIdPessoa());
+        EnderecoEntity enderecoRecuperado = enderecoRepository.getById(id);
+
+//        enderecoRecuperado.setIdPessoa(enderecoAtualizar.getIdPessoa());
         enderecoRecuperado.setTipo(enderecoAtualizar.getTipo());
         enderecoRecuperado.setLogradouro(enderecoAtualizar.getLogradouro());
         enderecoRecuperado.setNumero(enderecoAtualizar.getNumero());
@@ -56,35 +61,36 @@ public class EnderecoService {
         enderecoRecuperado.setEstado(enderecoAtualizar.getEstado());
         enderecoRecuperado.setPais(enderecoAtualizar.getPais());
 
-        emailService.sendEmail(pessoa, enderecoRecuperado, 2);
+//        emailService.sendEmail(pessoa, enderecoRecuperado, 2);
+        EnderecoEntity enderecoEditado = enderecoRepository.save(enderecoRecuperado);
 
-        return objectMapper.convertValue(enderecoRecuperado, EnderecoDTO.class);
+        EnderecoDTO enderecoDTO = objectMapper.convertValue(enderecoEditado, EnderecoDTO.class);
+        return enderecoDTO;
     }
 
-    public List<EnderecoDTO> listaPorPessoa (Integer idPessoa) throws Exception {
-        List<EnderecoEntity> listaEnderecos = enderecoRepository.listaEnderecosPorIdPessoa(idPessoa);
-        if (listaEnderecos.isEmpty()) {
-            throw new RegraDeNegocioException ("Pessoa não encontrada");
-        }
-        List<EnderecoDTO> listaDTO = listaEnderecos.stream()
-                .map(endereco -> objectMapper.convertValue(endereco, EnderecoDTO.class))
-                .collect(Collectors.toList());
-        return listaDTO;
-    }
+//    public List<EnderecoDTO> listaPorPessoa (Integer idPessoa) throws Exception {
+//        List<EnderecoEntity> listaEnderecos = enderecoRepository.listaEnderecosPorIdPessoa(idPessoa);
+//        if (listaEnderecos.isEmpty()) {
+//            throw new RegraDeNegocioException ("Pessoa não encontrada");
+//        }
+//        List<EnderecoDTO> listaDTO = listaEnderecos.stream()
+//                .map(endereco -> objectMapper.convertValue(endereco, EnderecoDTO.class))
+//                .collect(Collectors.toList());
+//        return listaDTO;
+//    }
     public EnderecoDTO getEndereco(Integer id) throws Exception {
-        return objectMapper.convertValue(getEnderecoById(id), EnderecoDTO.class);
+        EnderecoDTO enderecoDTO = objectMapper.convertValue(enderecoRepository.findById(id), EnderecoDTO.class);
+        return enderecoDTO;
     }
 
     public EnderecoEntity getEnderecoById(Integer id) throws Exception {
-        return enderecoRepository.lista().stream()
-                .filter(endereco -> endereco.getIdEndereco().equals(id))
-                .findFirst()
+        return enderecoRepository.findById(id)
                 .orElseThrow(() -> new RegraDeNegocioException("Endereço não encontrado!"));
     }
 
     public void delete (Integer idEndereco) throws Exception {
-        EnderecoEntity enderecoRecuperado = objectMapper.convertValue(getEndereco(idEndereco), EnderecoEntity.class);
-        emailService.sendEmail(pessoaService.getPessoa(enderecoRecuperado.getIdPessoa()), enderecoRecuperado, 3);
-        enderecoRepository.delete(enderecoRecuperado);
+        EnderecoEntity enderecoEntity = getEnderecoById(idEndereco);
+//        emailService.sendEmail(pessoaService.getPessoa(enderecoRecuperado.getIdPessoa()), enderecoRecuperado, 3);
+        enderecoRepository.deleteById(enderecoEntity.getIdEndereco());
     }
 }

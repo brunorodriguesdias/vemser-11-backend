@@ -27,7 +27,8 @@ public class ContatoController implements ContatoDoc {
     @Override
     @GetMapping("/{idPessoa}") // GET localhost:8080/contato/{idPessoa}
     public ResponseEntity<List<ContatoDTO>> listaPorPessoa (@PathVariable("idPessoa") Integer idPessoa) throws Exception {
-        return new ResponseEntity<>(contatoService.listaPorPessoa(idPessoa), OK);
+        return null;
+//        return new ResponseEntity<>(contatoService.listaPorPessoa(idPessoa), OK);
     }
     @Override
     @PostMapping("/{idPessoa}") // POST localhost:8080/contato/{idPessoa}

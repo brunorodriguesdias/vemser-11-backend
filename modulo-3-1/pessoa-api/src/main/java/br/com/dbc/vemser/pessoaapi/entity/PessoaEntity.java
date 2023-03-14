@@ -3,13 +3,15 @@ package br.com.dbc.vemser.pessoaapi.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class Contato {
-    private Integer idContato;
+@NoArgsConstructor
+public class PessoaEntity {
     private Integer idPessoa;
-    private TipoContato tipoContato;
-    private String numero;
-    private String descricao;
+    private String nome;
+    private LocalDate dataNascimento;
+    private String cpf;
+    private String email;
 }

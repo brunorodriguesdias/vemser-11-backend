@@ -34,7 +34,8 @@ public class EnderecoController implements EnderecoDoc {
     @Override
     @GetMapping("/{idPessoa}/pessoa") // GET localhost:8080/endereco/{idPessoa}
     public ResponseEntity<List<EnderecoDTO>> listaPorPessoa (@PathVariable("idPessoa") Integer idPessoa) throws Exception {
-        return new ResponseEntity<>(enderecoService.listaPorPessoa(idPessoa), OK);
+        return null;
+//        return new ResponseEntity<>(enderecoService.listaPorPessoa(idPessoa), OK);
     }
     @Override
     @PostMapping("/{idPessoa}") // POST localhost:8080/endereco/{idPessoa}
