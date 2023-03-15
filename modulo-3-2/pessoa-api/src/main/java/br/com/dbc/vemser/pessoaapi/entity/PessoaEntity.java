@@ -1,9 +1,12 @@
 package br.com.dbc.vemser.pessoaapi.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Set;
+
 //@Data não usar o @Data
 @Getter
 @Setter
@@ -28,4 +31,25 @@ public class PessoaEntity {
 
     @Column
     private String email;
+
+    @JsonIgnore
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "Pessoa_X_Pessoa_Endereco",
+            joinColumns = @JoinColumn(name = "id_pessoa"),
+            inverseJoinColumns = @JoinColumn(name = "id_endereco"))
+    private Set<EnderecoEntity> endereco;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "pessoa", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<ContatoEntity> contato;
+
+    @Transient
+    @JsonIgnore
+    @OneToMany(mappedBy = "pessoa", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<PetEntity> pet;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "pessoa", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<PessoaXFilmeEntity> pessoXfilme;
+
 }

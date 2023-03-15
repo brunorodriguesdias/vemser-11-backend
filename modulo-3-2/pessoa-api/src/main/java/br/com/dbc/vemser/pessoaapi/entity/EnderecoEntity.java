@@ -1,8 +1,10 @@
 package br.com.dbc.vemser.pessoaapi.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 //@Data não usar o @Data
 
 @Getter
@@ -18,6 +20,7 @@ public class EnderecoEntity {
     @SequenceGenerator(name = "ENDERECO_SEQ", sequenceName = "SEQ_ENDERECO_CONTATO", allocationSize = 1)
     private Integer idEndereco;
 
+//    @Column(name = "id_pessoa", insertable = false, updatable = false)
 //    private Integer idPessoa;
 
     @Column(name = "tipo")
@@ -43,4 +46,8 @@ public class EnderecoEntity {
 
     @Column(name = "pais")
     private String pais;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "endereco", fetch = FetchType.LAZY)
+    private Set<PessoaEntity> pessoa;
 }

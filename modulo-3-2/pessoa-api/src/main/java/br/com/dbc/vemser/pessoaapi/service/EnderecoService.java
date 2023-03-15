@@ -68,16 +68,18 @@ public class EnderecoService {
         return enderecoDTO;
     }
 
-//    public List<EnderecoDTO> listaPorPessoa (Integer idPessoa) throws Exception {
-//        List<EnderecoEntity> listaEnderecos = enderecoRepository.listaEnderecosPorIdPessoa(idPessoa);
-//        if (listaEnderecos.isEmpty()) {
-//            throw new RegraDeNegocioException ("Pessoa não encontrada");
-//        }
-//        List<EnderecoDTO> listaDTO = listaEnderecos.stream()
-//                .map(endereco -> objectMapper.convertValue(endereco, EnderecoDTO.class))
-//                .collect(Collectors.toList());
-//        return listaDTO;
-//    }
+    public List<EnderecoDTO> listaPorPessoa (Integer idPessoa) throws Exception {
+        PessoaEntity pessoaEntity = pessoaService.getPessoa(idPessoa);
+        List<EnderecoDTO> enderecoDTOList = enderecoRepository.findAllByPessoa(pessoaEntity)
+                .stream()
+                .map(enderecoEntity -> {
+                    EnderecoDTO enderecoDTO = objectMapper.convertValue(enderecoEntity, EnderecoDTO.class);
+                    enderecoDTO.setIdPessoa(pessoaEntity.getIdPessoa());
+                    return enderecoDTO;
+                })
+                .toList();
+        return enderecoDTOList;
+    }
     public EnderecoDTO getEndereco(Integer id) throws Exception {
         EnderecoDTO enderecoDTO = objectMapper.convertValue(enderecoRepository.findById(id), EnderecoDTO.class);
         return enderecoDTO;

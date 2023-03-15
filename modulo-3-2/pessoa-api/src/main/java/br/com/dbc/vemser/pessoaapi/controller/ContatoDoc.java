@@ -42,9 +42,8 @@ public interface ContatoDoc {
                     @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
             }
     )
-    @PostMapping("/{idPessoa}") // POST localhost:8080/contato/{idPessoa}
-    public ContatoDTO create(@PathVariable Integer idPessoa,
-                             @Valid @RequestBody ContatoCreateDTO contatoDTO) throws Exception;
+    @PostMapping // POST localhost:8080/contato/{idPessoa}
+    public ResponseEntity<ContatoDTO> create(@Valid @RequestBody ContatoCreateDTO contatoDTO) throws Exception;
 
     @Operation(summary = "Edita um contato", description = "Edita o contato selecionado")
     @ApiResponses(

@@ -2,8 +2,10 @@ package br.com.dbc.vemser.pessoaapi.controller;
 
 import br.com.dbc.vemser.pessoaapi.dto.ContatoCreateDTO;
 import br.com.dbc.vemser.pessoaapi.dto.ContatoDTO;
+import br.com.dbc.vemser.pessoaapi.exceptions.RegraDeNegocioException;
 import br.com.dbc.vemser.pessoaapi.service.ContatoService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -31,11 +33,12 @@ public class ContatoController implements ContatoDoc {
 //        return new ResponseEntity<>(contatoService.listaPorPessoa(idPessoa), OK);
     }
     @Override
-    @PostMapping("/{idPessoa}") // POST localhost:8080/contato/{idPessoa}
-    public ContatoDTO create(@PathVariable Integer idPessoa,
-                          @Valid @RequestBody ContatoCreateDTO contatoDTO) throws Exception {
-        log.info("Criando contato...");
-        return contatoService.create(contatoDTO, idPessoa);
+    @PostMapping
+    public ResponseEntity<ContatoDTO> create(@RequestBody @Valid ContatoCreateDTO contato) throws Exception {
+        log.info("Criando Contato!");
+        ContatoDTO contatoCriado = contatoService.create(contato);
+        log.info("Contato Criado!");
+        return ResponseEntity.ok(contatoCriado);
     }
     @Override
     @PutMapping("/{idContato}") // PUT localhost:8080/contato/{idContato}
