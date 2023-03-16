@@ -16,7 +16,7 @@ public class FilmeCreateDTO {
     private String descricao;
 
     @Schema(description = "Nota do filme", example = "7.54")
-    private double nota;
+    private Double nota;
 
     @NotNull
     @Schema(description = "Categoria do filme", example = "TERROR")

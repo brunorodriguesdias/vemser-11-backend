@@ -2,13 +2,10 @@ package br.com.dbc.vemser.pessoaapi.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -19,13 +16,13 @@ public class PessoaXFilmeEntity {
     private PessoaPK pessoaPK;
 
     @Column(name = "dt_assistido")
-    private LocalDate dtassistido;
+    private LocalDate dtAssistido;
 
     @Column(name = "descricao")
-    private String descricao;
+    private String descricaoPessoa;
 
     @Column(name = "nota_pessoa")
-    private double nota;
+    private Double notaPessoa;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)

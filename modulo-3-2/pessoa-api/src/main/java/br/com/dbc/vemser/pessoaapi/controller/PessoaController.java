@@ -1,5 +1,6 @@
 package br.com.dbc.vemser.pessoaapi.controller;
 
+import br.com.dbc.vemser.pessoaapi.dto.PessoaComTodasRelacoesDTO;
 import br.com.dbc.vemser.pessoaapi.dto.PessoaCreateDTO;
 import br.com.dbc.vemser.pessoaapi.dto.PessoaDTO;
 import br.com.dbc.vemser.pessoaapi.exceptions.RegraDeNegocioException;
@@ -80,5 +81,10 @@ public class PessoaController implements PessoaDoc {
         pessoaService.delete(id);
         log.info("Pessoa deletada!");
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/relacoes") // GET localhost:8080/pessoa
+    public List<PessoaComTodasRelacoesDTO> listarPessoasERelacoes() {
+        return pessoaService.listarPessoasERelacoes();
     }
 }

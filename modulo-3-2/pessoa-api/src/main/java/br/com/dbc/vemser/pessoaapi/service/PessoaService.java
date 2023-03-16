@@ -1,5 +1,6 @@
 package br.com.dbc.vemser.pessoaapi.service;
 
+import br.com.dbc.vemser.pessoaapi.dto.PessoaComTodasRelacoesDTO;
 import br.com.dbc.vemser.pessoaapi.dto.PessoaCreateDTO;
 import br.com.dbc.vemser.pessoaapi.dto.PessoaDTO;
 import br.com.dbc.vemser.pessoaapi.entity.EnderecoEntity;
@@ -90,9 +91,11 @@ public class PessoaService {
     }
 
     public void adicionarEndereco(EnderecoEntity enderecoEntity, PessoaEntity pessoaEntity) {
-        Set<EnderecoEntity> enderecoEntities = new HashSet<>();
-        enderecoEntities.add(enderecoEntity);
-        pessoaEntity.setEnderecos(enderecoEntities);
+        pessoaEntity.getEnderecos().add(enderecoEntity);
         pessoaRepository.save(pessoaEntity);
+    }
+
+    public List<PessoaComTodasRelacoesDTO> listarPessoasERelacoes() {
+        return pessoaRepository.listarPessoaComRelacoes();
     }
 }

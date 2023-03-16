@@ -19,12 +19,12 @@ public class PessoaXFilmeCreateDTO {
     private Integer idFilme;
 
     @NotNull
-    private LocalDate dtassistido;
+    private LocalDate dtAssistido;
 
     @NotBlank
-    private String descricao;
+    private String descricaoPessoa;
 
     @NotNull
-    private double nota;
+    private Double notaPessoa;
 
 }

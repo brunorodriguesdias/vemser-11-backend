@@ -11,7 +11,7 @@ import java.util.Set;
 
 @Getter
 @Setter
-@Entity(name = "pet")
+@Entity(name = "PET")
 @NoArgsConstructor
 @AllArgsConstructor
 public class PetEntity {
@@ -23,13 +23,14 @@ public class PetEntity {
     private Integer idPessoa;
 
     @Column(name = "nome")
-    private String nome;
+    private String nomePet;
 
     @Column(name = "tipo_pet")
     private TipoPet tipoPet;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_pessoa", referencedColumnName = "id_pessoa")
     private PessoaEntity pessoas;
 
 }

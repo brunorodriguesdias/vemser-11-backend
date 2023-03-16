@@ -43,9 +43,8 @@ public class PessoaEntity {
     @OneToMany(mappedBy = "pessoa", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<ContatoEntity> contatos;
 
-    @Transient
     @JsonIgnore
-    @OneToMany(mappedBy = "pessoa", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "pessoas", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<PetEntity> pets;
 
     @JsonIgnore

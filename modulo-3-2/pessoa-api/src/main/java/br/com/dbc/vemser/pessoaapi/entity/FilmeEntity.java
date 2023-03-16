@@ -25,7 +25,7 @@ public class FilmeEntity {
     private String descricao;
 
     @Column(name = "nota")
-    private double nota;
+    private Double nota;
 
     @Column(name = "tipo")
     private TipoFilme tipo;

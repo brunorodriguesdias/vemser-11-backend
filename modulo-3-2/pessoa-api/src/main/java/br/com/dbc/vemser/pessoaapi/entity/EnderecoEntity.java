@@ -47,5 +47,4 @@ public class EnderecoEntity {
     @JsonIgnore
     @ManyToMany(mappedBy = "enderecos", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private Set<PessoaEntity> pessoa;
-
 }
