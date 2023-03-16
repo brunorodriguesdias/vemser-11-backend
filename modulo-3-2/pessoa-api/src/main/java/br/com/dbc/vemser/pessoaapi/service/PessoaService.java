@@ -1,5 +1,6 @@
 package br.com.dbc.vemser.pessoaapi.service;
 
+import br.com.dbc.vemser.pessoaapi.dto.PageDTO;
 import br.com.dbc.vemser.pessoaapi.dto.PessoaComTodasRelacoesDTO;
 import br.com.dbc.vemser.pessoaapi.dto.PessoaCreateDTO;
 import br.com.dbc.vemser.pessoaapi.dto.PessoaDTO;
@@ -9,12 +10,14 @@ import br.com.dbc.vemser.pessoaapi.exceptions.RegraDeNegocioException;
 import br.com.dbc.vemser.pessoaapi.repository.PessoaRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -98,4 +101,13 @@ public class PessoaService {
     public List<PessoaComTodasRelacoesDTO> listarPessoasERelacoes() {
         return pessoaRepository.listarPessoaComRelacoes();
     }
+
+//    public PageDTO<PessoaDTO> listarPessoaPorDataNascimento(LocalDate dataNascimento, Integer pagina, Integer tamanho) {
+//        Pageable solicitacaoPagina = PageRequest.of(pagina, tamanho);
+//        Page<PessoaEntity> paginaDePessoasNascidasAntes = pessoaRepository.findAllByDataNascimentoGreaterThanEqual(solicitacaoPagina, dataNascimento);
+//
+//        List<PessoaDTO> paginaDePessoasDTO = paginaDePessoasNascidasAntes.getContent().stream()
+//                .map(pessoas -> objectMapper.convertValue(pessoas, PessoaDTO.class))
+//                .toList();
+//    }
 }

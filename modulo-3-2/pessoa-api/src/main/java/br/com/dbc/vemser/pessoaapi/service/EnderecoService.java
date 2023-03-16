@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -69,6 +68,7 @@ public class EnderecoService {
 
 //        emailService.sendEmail(pessoa, enderecoRecuperado, 2);
         EnderecoEntity enderecoEditado = enderecoRepository.save(enderecoRecuperado);
+        pessoaService.adicionarEndereco(enderecoEditado, pessoa);
 
         EnderecoDTO enderecoDTO = objectMapper.convertValue(enderecoEditado, EnderecoDTO.class);
         enderecoDTO.setIdPessoa(pessoa.getIdPessoa());
@@ -77,7 +77,7 @@ public class EnderecoService {
 
     public List<EnderecoDTO> listaPorPessoa (Integer idPessoa) throws Exception {
         PessoaEntity pessoaEntity = pessoaService.getPessoa(idPessoa);
-        List<EnderecoDTO> enderecoDTOList = enderecoRepository.findAllByPessoa(pessoaEntity)
+        List<EnderecoDTO> enderecoDTOList = enderecoRepository.findAllByPessoas(pessoaEntity)
                 .stream()
                 .map(enderecoEntity -> {
                     EnderecoDTO enderecoDTO = objectMapper.convertValue(enderecoEntity, EnderecoDTO.class);

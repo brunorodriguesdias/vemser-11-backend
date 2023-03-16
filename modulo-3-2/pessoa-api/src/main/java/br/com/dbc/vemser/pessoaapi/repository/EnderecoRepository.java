@@ -13,7 +13,7 @@ public interface EnderecoRepository extends JpaRepository<EnderecoEntity, Intege
 
     List<EnderecoEntity> findAllByCepOrderByLogradouro(String cep);
 
-    List<EnderecoEntity> findAllByPessoa(PessoaEntity pessoaEntity);
+    List<EnderecoEntity> findAllByPessoas(PessoaEntity pessoaEntity);
 
     @Query("select e" +
             " from ENDERECO_PESSOA e" +
