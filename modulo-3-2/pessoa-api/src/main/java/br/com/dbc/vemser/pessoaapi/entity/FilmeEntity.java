@@ -32,5 +32,5 @@ public class FilmeEntity {
 
     @JsonIgnore
     @OneToMany(mappedBy = "filme", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<PessoaXFilmeEntity> pessoXfilme;
+    private Set<PessoaXFilmeEntity> avaliacoes;
 }

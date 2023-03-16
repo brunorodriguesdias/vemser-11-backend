@@ -2,6 +2,7 @@ package br.com.dbc.vemser.pessoaapi.controller;
 
 import br.com.dbc.vemser.pessoaapi.dto.EnderecoCreateDTO;
 import br.com.dbc.vemser.pessoaapi.dto.EnderecoDTO;
+import br.com.dbc.vemser.pessoaapi.exceptions.RegraDeNegocioException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -21,7 +22,7 @@ public interface EnderecoDoc {
             }
     )
     @GetMapping // GET localhost:8080/endereco
-    public List<EnderecoDTO> list ();
+    public List<EnderecoDTO> list () throws RegraDeNegocioException;
 
     @Operation(summary = "Buscar endereço por id", description = "Busca um endereço pelo seu id")
     @ApiResponses(
@@ -53,9 +54,8 @@ public interface EnderecoDoc {
                     @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
             }
     )
-    @PostMapping("/{idPessoa}") // POST localhost:8080/endereco/{idPessoa}
-    public EnderecoDTO create (@PathVariable Integer idPessoa,
-                               @Valid @RequestBody EnderecoCreateDTO enderecoDTO) throws Exception;
+    @PostMapping("/criar") // POST localhost:8080/endereco/{idPessoa}
+    public EnderecoDTO create (@Valid @RequestBody EnderecoCreateDTO enderecoDTO) throws Exception;
 
     @Operation(summary = "Editar endereço", description = "Edita o endereço selecionado")
     @ApiResponses(

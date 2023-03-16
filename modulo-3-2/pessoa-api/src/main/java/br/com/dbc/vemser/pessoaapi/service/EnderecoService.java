@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,25 +25,30 @@ public class EnderecoService {
 
 
 
-    public EnderecoDTO create(EnderecoCreateDTO enderecoCreateDTO, Integer idPessoa) throws Exception {
-        PessoaEntity pessoa = pessoaService.getPessoa(idPessoa);
-        enderecoCreateDTO.setIdPessoa(pessoa.getIdPessoa());
+    public EnderecoDTO create(EnderecoCreateDTO enderecoCreateDTO) throws Exception {
+        PessoaEntity pessoa = pessoaService.getPessoa(enderecoCreateDTO.getIdPessoa());
 
         EnderecoEntity enderecoEntity = objectMapper.convertValue(enderecoCreateDTO, EnderecoEntity.class);
-        EnderecoEntity enderecoCriado = enderecoRepository.save(enderecoEntity);
+        enderecoRepository.save(enderecoEntity);
+        pessoaService.adicionarEndereco(enderecoEntity, pessoa);
 
 //        emailService.sendEmail(pessoa, endereco, 1);
 
-        EnderecoDTO enderecoDTO = objectMapper.convertValue(enderecoCriado, EnderecoDTO.class);
-
+        EnderecoDTO enderecoDTO = objectMapper.convertValue(enderecoEntity, EnderecoDTO.class);
+        enderecoDTO.setIdPessoa(pessoa.getIdPessoa());
         return enderecoDTO;
     }
 
-    public List<EnderecoDTO> lista () {
-        return enderecoRepository.findAll()
-                .stream()
-                .map(endereco -> objectMapper.convertValue(endereco, EnderecoDTO.class))
-                .collect(Collectors.toList());
+    public List<EnderecoDTO> lista () throws RegraDeNegocioException {
+        List<EnderecoEntity> enderecoEntityList = enderecoRepository.findAll();
+        List<EnderecoDTO> enderecoDTOList = new ArrayList<>();
+        for (EnderecoEntity endereco: enderecoEntityList){
+            PessoaEntity pessoa = pessoaService.getPessoaByEndereco(endereco);
+            EnderecoDTO enderecoDTO = objectMapper.convertValue(endereco, EnderecoDTO.class);
+            enderecoDTO.setIdPessoa(pessoa.getIdPessoa());
+            enderecoDTOList.add(enderecoDTO);
+        }
+        return enderecoDTOList;
     }
 
     public EnderecoDTO update(Integer id, EnderecoCreateDTO enderecoAtualizar) throws Exception {
@@ -51,7 +57,7 @@ public class EnderecoService {
 
         EnderecoEntity enderecoRecuperado = enderecoRepository.getById(id);
 
-//        enderecoRecuperado.setIdPessoa(enderecoAtualizar.getIdPessoa());
+
         enderecoRecuperado.setTipo(enderecoAtualizar.getTipo());
         enderecoRecuperado.setLogradouro(enderecoAtualizar.getLogradouro());
         enderecoRecuperado.setNumero(enderecoAtualizar.getNumero());
@@ -65,6 +71,7 @@ public class EnderecoService {
         EnderecoEntity enderecoEditado = enderecoRepository.save(enderecoRecuperado);
 
         EnderecoDTO enderecoDTO = objectMapper.convertValue(enderecoEditado, EnderecoDTO.class);
+        enderecoDTO.setIdPessoa(pessoa.getIdPessoa());
         return enderecoDTO;
     }
 
@@ -81,7 +88,11 @@ public class EnderecoService {
         return enderecoDTOList;
     }
     public EnderecoDTO getEndereco(Integer id) throws Exception {
-        EnderecoDTO enderecoDTO = objectMapper.convertValue(enderecoRepository.findById(id), EnderecoDTO.class);
+        EnderecoEntity enderecoEntity = enderecoRepository.findById(id)
+                .orElseThrow(() -> new RegraDeNegocioException("Endereço não encontrado!"));
+        PessoaEntity pessoaEntity = pessoaService.getPessoaByEndereco(enderecoEntity);
+        EnderecoDTO enderecoDTO = objectMapper.convertValue(enderecoEntity, EnderecoDTO.class);
+        enderecoDTO.setIdPessoa(pessoaEntity.getIdPessoa());
         return enderecoDTO;
     }
 
@@ -93,6 +104,6 @@ public class EnderecoService {
     public void delete (Integer idEndereco) throws Exception {
         EnderecoEntity enderecoEntity = getEnderecoById(idEndereco);
 //        emailService.sendEmail(pessoaService.getPessoa(enderecoRecuperado.getIdPessoa()), enderecoRecuperado, 3);
-        enderecoRepository.deleteById(enderecoEntity.getIdEndereco());
+        enderecoRepository.delete(enderecoEntity);
     }
 }

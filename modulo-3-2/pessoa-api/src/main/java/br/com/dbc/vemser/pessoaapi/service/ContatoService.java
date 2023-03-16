@@ -22,7 +22,6 @@ public class ContatoService {
     private final ObjectMapper objectMapper;
 
     public ContatoDTO create(ContatoCreateDTO contatoCreateDTO) throws Exception {
-//        contatoCreateDTO.setIdPessoa(pessoaService.getPessoa(idPessoa).getIdPessoa());
         ContatoEntity contatoEntity = objectMapper.convertValue(contatoCreateDTO, ContatoEntity.class);
         contatoEntity.setIdPessoa(contatoCreateDTO.getIdPessoa());
         System.out.println(contatoEntity.getIdPessoa());
@@ -43,8 +42,8 @@ public class ContatoService {
     public ContatoDTO update(Integer id, ContatoCreateDTO contatoAtualizar) throws Exception {
         pessoaService.getPessoa(contatoAtualizar.getIdPessoa());
         ContatoEntity contatoRecuperado = getContato(id);
-//        contatoRecuperado.setIdPessoa(contatoAtualizar.getIdPessoa());
-        contatoRecuperado.setTipo(contatoAtualizar.getTipoContato());
+        contatoRecuperado.setIdPessoa(contatoAtualizar.getIdPessoa());
+        contatoRecuperado.setTipo(contatoAtualizar.getTipo());
         contatoRecuperado.setNumero(contatoAtualizar.getNumero());
         contatoRecuperado.setDescricao(contatoAtualizar.getDescricao());
 

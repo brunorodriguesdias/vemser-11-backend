@@ -2,6 +2,7 @@ package br.com.dbc.vemser.pessoaapi.controller;
 
 import br.com.dbc.vemser.pessoaapi.dto.EnderecoCreateDTO;
 import br.com.dbc.vemser.pessoaapi.dto.EnderecoDTO;
+import br.com.dbc.vemser.pessoaapi.exceptions.RegraDeNegocioException;
 import br.com.dbc.vemser.pessoaapi.service.EnderecoService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +26,7 @@ public class EnderecoController implements EnderecoDoc {
     }
     @Override
     @GetMapping // GET localhost:8080/endereco
-    public List<EnderecoDTO> list () { return enderecoService.lista(); }
+    public List<EnderecoDTO> list () throws RegraDeNegocioException { return enderecoService.lista(); }
     @Override
     @GetMapping("/{idEndereco}") // GET localhost:8080/endereco/{idEndereco}
     public ResponseEntity<EnderecoDTO> endereco (@PathVariable("idEndereco") Integer idEndereco) throws Exception {
@@ -37,11 +38,10 @@ public class EnderecoController implements EnderecoDoc {
         return new ResponseEntity<>(enderecoService.listaPorPessoa(idPessoa), OK);
     }
     @Override
-    @PostMapping("/{idPessoa}") // POST localhost:8080/endereco/{idPessoa}
-    public EnderecoDTO create (@PathVariable Integer idPessoa,
-                            @Valid @RequestBody EnderecoCreateDTO enderecoDTO) throws Exception {
+    @PostMapping("/criar") // POST localhost:8080/endereco/{idPessoa}
+    public EnderecoDTO create (@Valid @RequestBody EnderecoCreateDTO enderecoDTO) throws Exception {
         log.info("Criando endereço...");
-        return enderecoService.create(enderecoDTO, idPessoa);
+        return enderecoService.create(enderecoDTO);
     }
     @Override
     @PutMapping("/{idEndereco}") // POST localhost:8080/endereco/{idEndereco}

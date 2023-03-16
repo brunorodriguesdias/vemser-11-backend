@@ -37,19 +37,19 @@ public class PessoaEntity {
     @JoinTable(name = "Pessoa_X_Pessoa_Endereco",
             joinColumns = @JoinColumn(name = "id_pessoa"),
             inverseJoinColumns = @JoinColumn(name = "id_endereco"))
-    private Set<EnderecoEntity> endereco;
+    private Set<EnderecoEntity> enderecos;
 
     @JsonIgnore
     @OneToMany(mappedBy = "pessoa", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<ContatoEntity> contato;
+    private Set<ContatoEntity> contatos;
 
     @Transient
     @JsonIgnore
     @OneToMany(mappedBy = "pessoa", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<PetEntity> pet;
+    private Set<PetEntity> pets;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "pessoa", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<PessoaXFilmeEntity> pessoXfilme;
+    @OneToMany(mappedBy = "pessoa", fetch = FetchType.LAZY)
+    private Set<PessoaXFilmeEntity> avaliacoes;
 
 }

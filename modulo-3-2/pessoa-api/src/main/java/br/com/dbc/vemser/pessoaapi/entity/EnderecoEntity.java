@@ -20,9 +20,6 @@ public class EnderecoEntity {
     @SequenceGenerator(name = "ENDERECO_SEQ", sequenceName = "SEQ_ENDERECO_CONTATO", allocationSize = 1)
     private Integer idEndereco;
 
-//    @Column(name = "id_pessoa", insertable = false, updatable = false)
-//    private Integer idPessoa;
-
     @Column(name = "tipo")
     private TipoEndereco tipo;
 
@@ -48,6 +45,7 @@ public class EnderecoEntity {
     private String pais;
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "endereco", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "enderecos", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private Set<PessoaEntity> pessoa;
+
 }

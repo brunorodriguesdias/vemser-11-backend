@@ -19,7 +19,7 @@ public class ContatoCreateDTO {
 
     @NotNull
     @Schema(description = "Tipo do contato", example = "COMERCIAL")
-    private TipoContato tipoContato;
+    private TipoContato tipo;
 
     @NotNull
     @Size(max=13)

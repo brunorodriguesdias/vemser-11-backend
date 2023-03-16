@@ -1,5 +1,6 @@
 package br.com.dbc.vemser.pessoaapi.repository;
 
+import br.com.dbc.vemser.pessoaapi.entity.EnderecoEntity;
 import br.com.dbc.vemser.pessoaapi.entity.PessoaEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -18,4 +19,6 @@ public interface PessoaRepository extends JpaRepository<PessoaEntity, Integer> {
     Optional<PessoaEntity> findByCpf(String cpf);
 
     List<PessoaEntity> findByDataNascimentoBetween(LocalDate inicio, LocalDate fim);
+
+    List<PessoaEntity> findByEnderecos(EnderecoEntity enderecoEntity);
 }
