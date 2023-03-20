@@ -109,5 +109,7 @@ public class PessoaService {
 //        List<PessoaDTO> paginaDePessoasDTO = paginaDePessoasNascidasAntes.getContent().stream()
 //                .map(pessoas -> objectMapper.convertValue(pessoas, PessoaDTO.class))
 //                .toList();
+//
+//        return new PageDTO<>(paginaDePessoasDTO.get)
 //    }
 }
