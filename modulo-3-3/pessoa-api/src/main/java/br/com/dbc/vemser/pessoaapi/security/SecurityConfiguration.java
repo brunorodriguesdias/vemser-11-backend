@@ -30,8 +30,8 @@ public class SecurityConfiguration {
         http.headers().frameOptions().disable()
                 .and().cors()
                 .and().csrf().disable()
-                .authorizeHttpRequests((requisicao) -> requisicao
-                        .antMatchers("/")
+                .authorizeHttpRequests((requisicao) ->
+                        requisicao.antMatchers("/")
                         .permitAll()
                         .anyRequest()
                         .authenticated());
