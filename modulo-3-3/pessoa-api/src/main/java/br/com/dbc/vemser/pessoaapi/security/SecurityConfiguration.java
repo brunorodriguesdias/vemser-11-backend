@@ -30,7 +30,11 @@ public class SecurityConfiguration {
         http.headers().frameOptions().disable()
                 .and().cors()
                 .and().csrf().disable()
-                .authorizeHttpRequests((bruno) -> bruno.antMatchers("/").permitAll().anyRequest().authenticated());
+                .authorizeHttpRequests((requisicao) -> requisicao
+                        .antMatchers("/")
+                        .permitAll()
+                        .anyRequest()
+                        .authenticated());
         http.addFilterBefore(new TokenAuthenticationFilter(tokenService), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
@@ -40,7 +44,8 @@ public class SecurityConfiguration {
         // FIXME fazer o security ignorar o swagger
         return (web) -> web.ignoring().antMatchers("/swagger-ui/**",
                                                                 "/v3/api-docs/**",
-                                                                "/auth");
+                                                                "/auth",
+                                                                "/");
     }
 
     @Bean

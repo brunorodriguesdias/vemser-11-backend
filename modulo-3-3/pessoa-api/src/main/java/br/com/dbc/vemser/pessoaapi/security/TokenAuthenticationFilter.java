@@ -26,16 +26,12 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
         // FIXME recuperar token do header
 
         String token = request.getHeader("Authorization");
-        try {
             // FIXME recuperar usuário do token
             Optional<UsuarioEntity> usuarioEntity = tokenService.isValid(token);
 
             // FIXME adicionar o usuário no contexto do spring security
             Authentication authentication = new UsernamePasswordAuthenticationToken(usuarioEntity.get(),null, null);
             SecurityContextHolder.getContext().setAuthentication(authentication);
-        } catch (RegraDeNegocioException e) {
-            throw new RuntimeException(e);
-        }
         filterChain.doFilter(request, response);
     }
 }

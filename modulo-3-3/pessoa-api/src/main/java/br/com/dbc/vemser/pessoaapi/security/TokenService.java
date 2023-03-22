@@ -22,17 +22,13 @@ public class TokenService {
 
     public String gerarToken(LoginDTO loginDTO) throws RegraDeNegocioException {
         // usuario = login = user  | senha = 123
-        Optional<UsuarioEntity> usuarioEntity = usuarioService.findByLoginAndSenha(loginDTO.getLogin(), loginDTO.getSenha());
-        if(usuarioEntity.isEmpty()) {
-            throw new RegraDeNegocioException("Usuário não encontrado!");
-        }
-        UsuarioEntity usuarioEncontrado = usuarioEntity.get();
+        UsuarioEntity usuarioEncontrado = usuarioService.verificaUsuario(loginDTO);
         String tokenTexto = usuarioEncontrado.getLogin() + ";" + usuarioEncontrado.getSenha(); // user;123
         String token = Base64.getEncoder().encodeToString(tokenTexto.getBytes()); // dXNlcjsxMjM=
         return token;
     }
 
-    public Optional<UsuarioEntity> isValid(String token) throws RegraDeNegocioException {
+    public Optional<UsuarioEntity> isValid(String token) {
         if(token == null){
             return Optional.empty();
         }
