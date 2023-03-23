@@ -23,12 +23,15 @@ public class TokenService {
     @Value("${jwt.secret}")
     private String secret;
 
+    @Value("${jwt.expiration}")
+    private String expiration;
+
     public String gerarToken(UsuarioEntity usuarioEncontrado) throws RegraDeNegocioException {
         String meuToken = Jwts.builder()
                 .claim("login", usuarioEncontrado.getLogin())
                 .claim(Claims.ID, String.valueOf(usuarioEncontrado.getIdUsuario()))
                 .setIssuedAt(Date.valueOf(LocalDate.now()))
-                .setExpiration(Date.valueOf(LocalDate.now().plusDays(1)))
+                .setExpiration(Date.valueOf(expiration))
                 .signWith(SignatureAlgorithm.HS256, secret)
                 .compact();
         return meuToken;
