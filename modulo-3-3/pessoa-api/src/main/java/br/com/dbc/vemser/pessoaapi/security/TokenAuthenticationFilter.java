@@ -3,6 +3,7 @@ package br.com.dbc.vemser.pessoaapi.security;
 import br.com.dbc.vemser.pessoaapi.entity.UsuarioEntity;
 import br.com.dbc.vemser.pessoaapi.exceptions.RegraDeNegocioException;
 import lombok.RequiredArgsConstructor;
+import org.apache.tomcat.util.http.parser.Authorization;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,19 +20,23 @@ import java.util.Optional;
 public class TokenAuthenticationFilter extends OncePerRequestFilter {
 
     private final TokenService tokenService;
+    private static final String BEARER = "Bearer ";
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-        // FIXME recuperar token do header
-        String token = request.getHeader("Authorization");
-
-            // FIXME recuperar usuário do token
-        Optional<UsuarioEntity> usuarioEntity = tokenService.isValid(token);
-
-            // FIXME adicionar o usuário no contexto do spring security
-        Authentication authentication = new UsernamePasswordAuthenticationToken(usuarioEntity.get(),null, null);
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+        String tokenFromHeader = getTokenFromHeader(request);
+        UsernamePasswordAuthenticationToken user = tokenService.isValid(tokenFromHeader);
+        SecurityContextHolder.getContext().setAuthentication(user);
         filterChain.doFilter(request, response);
+    }
+
+    private String getTokenFromHeader(HttpServletRequest request) {
+        String meuToken = request.getHeader("Authorization");
+        if (meuToken == null) {
+            return null;
+        }
+        meuToken = meuToken.replace(BEARER, "");
+        return meuToken;
     }
 }

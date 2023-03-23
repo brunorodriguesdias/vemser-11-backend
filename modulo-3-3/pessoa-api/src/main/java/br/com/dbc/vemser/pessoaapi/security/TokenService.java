@@ -1,41 +1,55 @@
 package br.com.dbc.vemser.pessoaapi.security;
 
 
-import br.com.dbc.vemser.pessoaapi.dto.LoginDTO;
 import br.com.dbc.vemser.pessoaapi.entity.UsuarioEntity;
 import br.com.dbc.vemser.pessoaapi.exceptions.RegraDeNegocioException;
 import br.com.dbc.vemser.pessoaapi.service.UsuarioService;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 
-import java.util.Base64;
-import java.util.Optional;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.Collections;
 
 @Service
 @RequiredArgsConstructor
 public class TokenService {
 
-    private final UsuarioService usuarioService;
-    private static final String BEARER = "Bearer ";
+    @Value("${jwt.secret}")
+    private String secret;
 
-    public String gerarToken(LoginDTO loginDTO) throws RegraDeNegocioException {
-        // usuario = login = user  | senha = 123
-        UsuarioEntity usuarioEncontrado = usuarioService.verificaUsuario(loginDTO);
-        String tokenTexto = usuarioEncontrado.getLogin() + ";" + usuarioEncontrado.getSenha(); // user;123
-        String token = Base64.getEncoder().encodeToString(tokenTexto.getBytes()); // dXNlcjsxMjM=
-        return token;
+    public String gerarToken(UsuarioEntity usuarioEncontrado) throws RegraDeNegocioException {
+        String meuToken = Jwts.builder()
+                .claim("login", usuarioEncontrado.getLogin())
+                .claim(Claims.ID, String.valueOf(usuarioEncontrado.getIdUsuario()))
+                .setIssuedAt(Date.valueOf(LocalDate.now()))
+                .setExpiration(Date.valueOf(LocalDate.now().plusDays(1)))
+                .signWith(SignatureAlgorithm.HS256, secret)
+                .compact();
+        return meuToken;
     }
 
-    public Optional<UsuarioEntity> isValid(String token) {
-        if(token == null){
-            return Optional.empty();
+    public UsernamePasswordAuthenticationToken isValid(String meuToken) {
+        try {
+            if (meuToken == null) {
+                return null;
+            }
+            Claims body = Jwts.parser()
+                    .setSigningKey(secret)
+                    .parseClaimsJws(meuToken)
+                    .getBody();
+            String user = body.get(Claims.ID, String.class);
+            if (user != null) {
+                return new UsernamePasswordAuthenticationToken(user, null, Collections.emptyList());
+            }
+        } catch (Exception e) {
+            return null;
         }
-        token = token.replace(BEARER, "");
-        byte[] decodedBytes = Base64.getUrlDecoder().decode(token);
-        String decoded = new String(decodedBytes); // login;senha
-        String[] split = decoded.split(";"); // [0] login [1] senha
-        return usuarioService.findByLoginAndSenha(split[0], split[1]);
+        return null;
     }
 }
