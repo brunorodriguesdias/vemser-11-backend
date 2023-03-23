@@ -48,7 +48,8 @@ public class SecurityConfiguration {
         // FIXME fazer o security ignorar o swagger
         return (web) -> web.ignoring().antMatchers("/swagger-ui/**",
                                                                 "/v3/api-docs/**",
-                                                                "/auth/**");
+                                                                "/auth",
+                                                                "/auth/create");
     }
 
     @Bean

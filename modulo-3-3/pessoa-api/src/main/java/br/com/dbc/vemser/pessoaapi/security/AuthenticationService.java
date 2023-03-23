@@ -1,4 +1,4 @@
-package br.com.dbc.vemser.pessoaapi.security.criadorDeSenhas;
+package br.com.dbc.vemser.pessoaapi.security;
 
 import br.com.dbc.vemser.pessoaapi.entity.UsuarioEntity;
 import br.com.dbc.vemser.pessoaapi.service.UsuarioService;

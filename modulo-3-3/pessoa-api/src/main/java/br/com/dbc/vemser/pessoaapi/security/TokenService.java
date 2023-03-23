@@ -31,7 +31,7 @@ public class TokenService {
                 .claim("login", usuarioEncontrado.getLogin())
                 .claim(Claims.ID, String.valueOf(usuarioEncontrado.getIdUsuario()))
                 .setIssuedAt(Date.valueOf(LocalDate.now()))
-                .setExpiration(Date.valueOf(expiration))
+                .setExpiration(Date.valueOf(LocalDate.now().plusDays(Long.parseLong(expiration))))
                 .signWith(SignatureAlgorithm.HS256, secret)
                 .compact();
         return meuToken;
