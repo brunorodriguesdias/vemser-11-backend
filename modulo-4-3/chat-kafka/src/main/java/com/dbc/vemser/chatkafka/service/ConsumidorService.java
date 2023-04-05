@@ -36,7 +36,6 @@ public class ConsumidorService {
             saidaFormatada = formatarSaida("%d/%d/%d %d:%d:%d [%s](privada): %s", mensagem);
             log.info(saidaFormatada);
         }
-
     }
 
     private String formatarSaida(String format, String mensagem) throws JsonProcessingException {

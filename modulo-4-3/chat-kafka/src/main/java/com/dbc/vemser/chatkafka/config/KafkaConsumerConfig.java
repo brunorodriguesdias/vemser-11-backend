@@ -20,7 +20,6 @@ public class KafkaConsumerConfig {
 
     @Value(value = "${spring.kafka.bootstrap-server}")
     private String bootstrapServer;
-
     @Value(value = "${spring.kafka.properties.security.protocol}")
     private String security;
     @Value(value = "${spring.kafka.properties.sasl.mechanism}")
@@ -29,7 +28,6 @@ public class KafkaConsumerConfig {
     private boolean idempotence;
     @Value(value = "${spring.kafka.properties.sasl.jaas.config}")
     private String config;
-
     @Value(value = "${kafka.client-id}")
     private String clienteId;
 

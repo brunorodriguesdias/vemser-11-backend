@@ -22,7 +22,6 @@ public class KafkaProducerConfig {
     private boolean idempotence;
     @Value(value = "${spring.kafka.properties.sasl.jaas.config}")
     private String config;
-
     @Value(value = "${spring.kafka.bootstrap-server}")
     private String bootstrapAddress; //localhost:9092
 
