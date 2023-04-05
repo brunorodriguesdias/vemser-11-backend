@@ -25,22 +25,18 @@ public class ConsumidorService {
     @KafkaListener(
             topics = "${kafka.topic}",
             groupId = "${kafka.group-id}",
-            topicPartitions = {@TopicPartition(topic = "${kafka.topic}", partitions = {"0"})},
+            topicPartitions = {@TopicPartition(topic = "${kafka.topic}", partitions = {"0", "1"})},
             containerFactory = "listenerContainerFactory1"
     )
     public void lerMensagemGeral(@Payload String mensagem, @Header(KafkaHeaders.RECEIVED_PARTITION_ID) Integer partition) throws JsonProcessingException {
         String saidaFormatada = formatarSaida("%d/%d/%d %d:%d:%d [%s](geral): %s", mensagem);
-        log.info(saidaFormatada);
-    }
-    @KafkaListener(
-            topics = "${kafka.topic}",
-            groupId = "${kafka.group-id}",
-            topicPartitions = {@TopicPartition(topic = "${kafka.topic}", partitions = {"1"})},
-            containerFactory = "listenerContainerFactory2"
-    )
-    public void lerMensagemPrivada(@Payload String mensagem, @Header(KafkaHeaders.RECEIVED_PARTITION_ID) Integer partition) throws JsonProcessingException {
-        String saidaFormatada = formatarSaida("%d/%d/%d %d:%d:%d [%s](privada): %s", mensagem);
-        log.info(saidaFormatada);
+        if (partition == 0) {
+            log.info(saidaFormatada);
+        } else {
+            saidaFormatada = formatarSaida("%d/%d/%d %d:%d:%d [%s](privada): %s", mensagem);
+            log.info(saidaFormatada);
+        }
+
     }
 
     private String formatarSaida(String format, String mensagem) throws JsonProcessingException {

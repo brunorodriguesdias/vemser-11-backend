@@ -30,43 +30,24 @@ public class KafkaConsumerConfig {
     @Value(value = "${spring.kafka.properties.sasl.jaas.config}")
     private String config;
 
+    @Value(value = "${kafka.client-id}")
+    private String clienteId;
+
     @Bean
     public ConcurrentKafkaListenerContainerFactory<String, String> listenerContainerFactory1() {
-        Map<String, Object> props = new HashMap<>();
-        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServer);
-        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-        props.put(ConsumerConfig.CLIENT_ID_CONFIG, "bruno");
-        props.put(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, 10);
-        props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, EARLIEST);
-        props.put("sasl.mechanism", mechanism);
-        props.put("sasl.jaas.config", config);
-        props.put("security.protocol", security);
-        props.put("enable.idempotence" , idempotence);
+        Map<String, Object> configProps = new HashMap<>();
+        configProps.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServer);
+        configProps.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        configProps.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        configProps.put(ConsumerConfig.CLIENT_ID_CONFIG, clienteId);
+        configProps.put(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, 10);
+        configProps.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, EARLIEST);
+        configProps.put("sasl.mechanism", mechanism);
+        configProps.put("sasl.jaas.config", config);
+        configProps.put("security.protocol", security);
+        configProps.put("enable.idempotence" , idempotence);
         DefaultKafkaConsumerFactory<Object, Object> kafkaConsumerFactory
-                = new DefaultKafkaConsumerFactory<>(props);
-
-        ConcurrentKafkaListenerContainerFactory<String, String> factory
-                = new ConcurrentKafkaListenerContainerFactory<>();
-        factory.setConsumerFactory(kafkaConsumerFactory);
-        return factory;
-    }
-
-    @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, String> listenerContainerFactory2() {
-        Map<String, Object> props = new HashMap<>();
-        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServer);
-        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-        props.put(ConsumerConfig.CLIENT_ID_CONFIG, "BRUNO");
-        props.put(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, 10);
-        props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, LATEST);
-        props.put("sasl.mechanism", mechanism);
-        props.put("sasl.jaas.config", config);
-        props.put("security.protocol", security);
-        props.put("enable.idempotence" , idempotence);
-        DefaultKafkaConsumerFactory<Object, Object> kafkaConsumerFactory
-                = new DefaultKafkaConsumerFactory<>(props);
+                = new DefaultKafkaConsumerFactory<>(configProps);
 
         ConcurrentKafkaListenerContainerFactory<String, String> factory
                 = new ConcurrentKafkaListenerContainerFactory<>();
